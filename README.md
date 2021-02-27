@@ -1,7 +1,9 @@
-# useful R packages and functions
-Author: pengfei luo  
-Date: Feb 27, 2021
 ---
+title: useful R packages and functions
+author: pengfei luo  
+data: Feb 27, 2021
+---
+
 ## plotting
 
  `cowplot`
