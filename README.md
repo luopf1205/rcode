@@ -4,29 +4,35 @@ author: pengfei luo
 ## 1. plotting
 
  `cowplot`
- -Plot grid for (ggplot object)
+ - Plot grid for (ggplot object)
 
  `ggtheme` 自动添加ggplot主题
 
 - e.g. `theme_stata()`
 
- `esquisse`	免代码ggplot生成器
+ `esquisse`	
+ - 免代码ggplot生成器
 
- `ggThemAssist`	界面调ggplot代码
+ `ggThemAssist`	
+ - 界面调ggplot代码
 
- `plotly`	交互界面图
+ `plotly`	
+ - 交互界面图
 
- `tygraphs`	plot mutiple time series (xts objects)
+ `tygraphs`
+ -plot mutiple time series (xts objects)
 
- `corrplot`	correlation plot
+ `corrplot`
+ -	correlation plot
  
 
 ## 2. 数据处理加工
 
- `tidyr`	data tidy
+ `tidyr`	
+ - data tidy
 
- `dyplr`	data wragling
-
+ `dyplr`
+-	data wragling
 - `mutate()`生成新变量
 - `select()` picks variables based on their names.
 - `filter()` picks cases based on their values.
@@ -34,10 +40,8 @@ author: pengfei luo
 - `arrange()` changes the ordering of the rows.
 - These all combine naturally with `group_by()` which allows you to perform any operation “by group”. You can learn more about them in `vignette("dplyr")`. As well as these single-table verbs, dplyr also provides a variety of two-table verbs, which you can learn about in `vignette("two-table")`.
 
- `tidyr`
-
+ `tidyr`  
 tidyr functions fall into five main categories:
-
 - “Pivotting” which converts between long and wide forms. tidyr 1.0.0 introduces `pivot_longer()` and `pivot_wider()`, replacing the older `spread()` and `gather()` functions. See `vignette("pivot")` for more details.
 - “Rectangling”, which turns deeply nested lists (as from JSON) into tidy tibbles. See `unnest_longer()`, `unnest_wider()`, `hoist()`, and `vignette("rectangle")` for more details.
 - Nesting converts grouped data to a form where each group becomes a single row containing a nested data frame, and unnesting does the opposite. See `nest()`, `unnest()`, and `vignette("nest")` for more details.
