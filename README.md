@@ -1,6 +1,9 @@
 
-Useful R packages and functions
-======
+# Useful R packages and functions
+author: Pengfei Luo
+Date: Feb 27, 2021
+------
+
 ## plotting
 
  `cowplot`
@@ -27,7 +30,8 @@ Useful R packages and functions
 
  `corrplot`
  -	correlation plot
-*** 
+-------
+
 ## tidyverse packages
 
  `dyplr`  
@@ -55,11 +59,13 @@ tidyr functions fall into five main categories:
 
  `stringr`
  -	处理字符串
+---------
 
 
 ## data.table
 forthcoming
-***
+-----------
+
 
 ## 统计计量相关
 
@@ -68,7 +74,8 @@ forthcoming
 
  `forecast`
  - ???, forcasting time series data
-***
+---------
+
 
 ## Descriptive statistics
 
@@ -79,13 +86,15 @@ forthcoming
 - descriptive statistics
 - for multiple series data: describe(df)/ as.data.table(df, describe(变量),by=分组条件变量)
 
-***
+----------
+
 
 ## VAR model
  `vars`
  - VAR模型,SVAR模型
 
-***
+---------
+
 
 ## GARCH model
 
@@ -94,8 +103,8 @@ forthcoming
 
  `rmgarch`
  - 多变量garch,引用`rugarch`功能
+----------
 
-***
 
 
 
@@ -110,7 +119,8 @@ forthcoming
 
 -  `PerformanceAnalystic`
 
-***
+---------
+
 
 ## 统计结果输出 (results output)
 
@@ -123,7 +133,8 @@ forthcoming
  - ???直接一键输出APA格式的表格到word文件
 
 
-***
+---------
+
 
 
 ## panel regression model
@@ -132,7 +143,7 @@ forthcoming
  - panel model regression
  - like `xtreg` in stata
 
-
+-------
 
 ## How to create dummy variables
 details see https://www.marsja.se/create-dummy-variables-in-r/#:~:text=A%20dummy%20variable%20is%20a,%2Fyes%20or%20off%2Fon.
@@ -164,11 +175,11 @@ dataf <- dummy_cols(dataf, select_columns = c('rank', 'discipline'))
 dataf.2 <- dummy_cols(dataf, select_columns = c('rank', 'discipline'),remove_selected_columns = TRUE)
 ```
 
-***
+-------
 
 ## Others
 
  `livecode`
  - 局域网网页直播写代码
 
-***
+--------
