@@ -1,6 +1,6 @@
 
-useful R packages and functions
-=
+Useful R packages and functions
+======
 ## plotting
 
  `cowplot`
@@ -28,7 +28,7 @@ useful R packages and functions
  `corrplot`
  -	correlation plot
 *** 
-## 2. tidyverse packages
+## tidyverse packages
 
  `dyplr`  
  data wragling, including functions as follows:
@@ -55,7 +55,7 @@ tidyr functions fall into five main categories:
 
  `stringr`
  -	处理字符串
-***
+
 
 ## data.table
 forthcoming
