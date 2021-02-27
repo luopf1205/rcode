@@ -1,0 +1,86 @@
+---
+title: "description statitics"
+author: "Pengfei Luo"
+date: "1/22/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE}
+rm(list=ls())
+library(tidyverse)
+library(data.table)
+library(psych)
+```
+
+Here we try several ways (packages) to summary descriptive statistics of data.(link: https://www.youtube.com/watch?v=ZA28sOmq7nU)
+
+## load data
+First, we load data from a local csv file. 
+```{r}
+pokemon <- as.data.table(read.csv("Pokemon.csv",stringsAsFactors = TRUE))
+pokemon
+str(as_tibble(pokemon))
+```
+
+
+## plot variables in dataframe
+```{r}
+# plot(pokemon)
+plot(pokemon[,3:10])
+plot(as_tibble(pokemon[,"Type.I"],pokemon[,'Atk']))
+```
+
+
+
+
+
+
+## descriptive statistics for our data, pokemon
+### summary() function from basic package
+```{r}
+summary(pokemon)
+```
+
+### describe/describeBy functions from psych package
+load *psych* package 
+```{r}
+library(psych)
+describe(pokemon[,3:9])
+```
+
+### use 'data table' and 'psy::describe' for grouping describe 
+```{r}
+library(data.table)
+as.data.table(pokemon)[,describe(Atk),by=Type.I]
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
