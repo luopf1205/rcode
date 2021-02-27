@@ -3,7 +3,8 @@ author: pengfei luo
 
 ## 1. plotting
 
- `cowplot`	Plot grid for (ggplot object)
+ `cowplot`
+ -Plot grid for (ggplot object)
 
  `ggtheme` 自动添加ggplot主题
 
