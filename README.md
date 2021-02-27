@@ -1,11 +1,11 @@
 
 # Useful R packages and functions
 author: Pengfei Luo   
-
 Date: Feb 27, 2021
 
-## plotting
+<br/>
 
+## plotting
  `cowplot`
  - Plot grid
  - ggplot objects
@@ -30,7 +30,8 @@ Date: Feb 27, 2021
 
  `corrplot`
  -	correlation plot
--------
+
+<br/>
 
 ## tidyverse packages
 
@@ -59,26 +60,24 @@ tidyr functions fall into five main categories:
 
  `stringr`
  -	处理字符串
----------
 
+<br/>
 
 ## data.table
 forthcoming
------------
 
+<br/>
 
 ## 统计计量相关
-
  `MASS`
  - 经典的统计方法
 
  `forecast`
  - ???, forcasting time series data
----------
 
+<br/>
 
 ## Descriptive statistics
-
  `summary`	
  - basic package for summarize descriptive statistics
 
@@ -86,30 +85,24 @@ forthcoming
 - descriptive statistics
 - for multiple series data: describe(df)/ as.data.table(df, describe(变量),by=分组条件变量)
 
-----------
-
+<br/>
 
 ## VAR model
  `vars`
  - VAR模型,SVAR模型
 
----------
-
+<br/>
 
 ## GARCH model
-
  `rugarch`
  - 单变量garch
 
  `rmgarch`
  - 多变量garch,引用`rugarch`功能
-----------
 
-
-
+<br/>
 
 ## 金融データ、処理
-
  `quantmod`  
   relative packages for getting and solving financial time series data from internet open source
 
@@ -119,8 +112,7 @@ forthcoming
 
 -  `PerformanceAnalystic`
 
----------
-
+<br/>
 
 ## 统计结果输出 (results output)
 
@@ -132,10 +124,7 @@ forthcoming
  `apaTables`
  - ???直接一键输出APA格式的表格到word文件
 
-
----------
-
-
+<br/>
 
 ## panel regression model
 
@@ -143,7 +132,7 @@ forthcoming
  - panel model regression
  - like `xtreg` in stata
 
--------
+<br/>
 
 ## How to create dummy variables
 details see https://www.marsja.se/create-dummy-variables-in-r/#:~:text=A%20dummy%20variable%20is%20a,%2Fyes%20or%20off%2Fon.
@@ -175,11 +164,11 @@ dataf <- dummy_cols(dataf, select_columns = c('rank', 'discipline'))
 dataf.2 <- dummy_cols(dataf, select_columns = c('rank', 'discipline'),remove_selected_columns = TRUE)
 ```
 
--------
+<br/>
 
 ## Others
 
  `livecode`
  - 局域网网页直播写代码
 
---------
+<br/>
