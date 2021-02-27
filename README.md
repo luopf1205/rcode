@@ -88,8 +88,12 @@ forthcoming
 <br/>
 
 ## VAR model
- `vars`
+### estimating VAR models
+`vars`
  - VAR模型,SVAR模型
+ - VAR obejects
+### estimating impulse response function (IRF)
+
 
 <br/>
 
