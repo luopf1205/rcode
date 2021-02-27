@@ -1,8 +1,6 @@
 
 useful R packages and functions
-author: pengfei luo  
-data: Feb 27, 2021
-
+=
 ## plotting
 
  `cowplot`
