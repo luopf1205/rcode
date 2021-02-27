@@ -18,6 +18,7 @@
  `tygraphs`	plot mutiple time series (xts objects)
 
  `corrplot`	correlation plot
+ 
 
 ## 2. 数据处理加工
 
@@ -76,7 +77,7 @@ descriptive statisticsusage: describe(df)/ as.data.table(df, describe(变量),by
 
 
 
-## GARCH model
+### GARCH model
 
  `rugarch`	单变量garch
 
@@ -88,7 +89,7 @@ descriptive statisticsusage: describe(df)/ as.data.table(df, describe(变量),by
 
 ## 4. 金融データ、処理
 
- `quantmod`
+ `quantmod` relative packages for getting and solving financial time series data from internet open source
 
 - ```getsymbols()```
 
