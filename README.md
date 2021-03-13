@@ -10,6 +10,10 @@ Date: Feb 27, 2021
  - Plot grid
  - ggplot objects
 
+`ggfortify`
+- Extension to ggplot2 to handle some popular packages - R software and data visualization
+- e.g. support plot multiple plots for xts objects 
+
  `ggtheme` 
  - 自动添加ggplot主题
  - using a stata style theme for plots
