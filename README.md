@@ -1,38 +1,38 @@
-# useful R packages
-author: pengfei luo
-
-## 1. plotting
+# useful R packages and functions
+Author: pengfei luo  
+Date: Feb 27, 2021
+---
+## plotting
 
  `cowplot`
- - Plot grid for (ggplot object)
+ - Plot grid
+ - ggplot objects
 
- `ggtheme` 自动添加ggplot主题
-
-- e.g. `theme_stata()`
+ `ggtheme` 
+ - 自动添加ggplot主题
+ - using a stata style theme for plots
+- e.g. `theme_stata()`, 
 
  `esquisse`	
- - 免代码ggplot生成器
+ - 免代码ggplot生成器, using ide to obtain ggplot code
 
  `ggThemAssist`	
- - 界面调ggplot代码
+ - 界面调ggplot代码, using ide to obtain ggplot code
 
  `plotly`	
- - 交互界面图
+ - 交互界面图, generate interactive plots
 
  `tygraphs`
- -plot mutiple time series (xts objects)
+ -plot mutiple time series
+ - xts objects
 
  `corrplot`
  -	correlation plot
- 
+*** 
+## 2. tidyverse packages
 
-## 2. 数据处理加工
-
- `tidyr`	
- - data tidy
-
- `dyplr`
--	data wragling
+ `dyplr`  
+ data wragling, including functions as follows:
 - `mutate()`生成新变量
 - `select()` picks variables based on their names.
 - `filter()` picks cases based on their values.
@@ -48,111 +48,128 @@ tidyr functions fall into five main categories:
 - Splitting and combining character columns. Use `separate()` and `extract()` to pull a single character column into multiple columns; use `unite()` to combine multiple columns into a single character column.
 - Make implicit missing values explicit with `complete()`; make explicit missing values implicit with `drop_na()`; replace missing values with next/previous value with `fill()`, or a known value with `replace_na()`.
 
- `data.table`	another object for tabular data
+ `lubridate` 
+ - 处理时间
 
- `lubridate`	处理时间
+ `reshape2`
+ -	变形,整合
 
- `reshape2`	变形,整合
+ `stringr`
+ -	处理字符串
+***
 
- `stringr`	处理字符串
+## data.table
+forthcoming
+***
 
+## 统计计量相关
 
+ `MASS`
+ - 经典的统计方法
 
-## 3. 统计相关
+ `forecast`
+ - ???, forcasting time series data
+***
 
- `MASS`	经典的统计方法
+## Descriptive statistics
 
- `forecast`	???
-
-
-
-### Descriptive statistics
-
- `summary`	basic package
+ `summary`	
+ - basic package for summarize descriptive statistics
 
  `psych::describe()`
+- descriptive statistics
+- for multiple series data: describe(df)/ as.data.table(df, describe(变量),by=分组条件变量)
 
-descriptive statisticsusage: describe(df)/ as.data.table(df, describe(变量),by=分组条件变量)
+***
+
+## VAR model
+ `vars`
+ - VAR模型,SVAR模型
+
+***
+
+## GARCH model
+
+ `rugarch`
+ - 单变量garch
+
+ `rmgarch`
+ - 多变量garch,引用`rugarch`功能
+
+***
 
 
 
-### VAR model
+## 金融データ、処理
 
- `vars`	VAR模型,SVAR模型
-
-
-
-### GARCH model
-
- `rugarch`	单变量garch
-
- `rmgarch`	多变量garch,引用‘’‘rugarch’‘’功能
-
-
-
-
-
-## 4. 金融データ、処理
-
- `quantmod` relative packages for getting and solving financial time series data from internet open source
+ `quantmod`  
+  relative packages for getting and solving financial time series data from internet open source
 
 - ```getsymbols()```
 
 - `chart???()`
 
- `PerformanceAnalystic`
+-  `PerformanceAnalystic`
+
+***
+
+## 统计结果输出 (results output)
+
+ `stargazer`	
+ - 统计结果输出
+ - like `xreg2` in Stata
+ - 内置格式, e.g. AER
+
+ `apaTables`
+ - ???直接一键输出APA格式的表格到word文件
+
+
+***
+
+
+## panel regression model
+
+ `plm`
+ - panel model regression
+ - like `xtreg` in stata
 
 
 
-## 5. 统计结果输出
-
- `stargazer`	统计结果输出, like xreg2 in Stata, 内置格式e.g. AER
-
- `apaTables`	???直接一键输出APA格式的表格到word文件
-
-
-
-
-
-## 6. panel regression model
-
- `plm`	panel model regression
-
-
-
-Dummy variable solution
-
-https://www.marsja.se/create-dummy-variables-in-r/#:~:text=A%20dummy%20variable%20is%20a,%2Fyes%20or%20off%2Fon.
-
-build dummy variables
+## How to create dummy variables
+details see https://www.marsja.se/create-dummy-variables-in-r/#:~:text=A%20dummy%20variable%20is%20a,%2Fyes%20or%20off%2Fon.
 
 `ifelse()`
-
+- basic R functions
+```r
 dataf$Disc_A <- ifelse(dataf$discipline == 'A', 1, 0) dataf$Disc_B <- ifelse(dataf$discipline == 'B', 1, 0)
+```
 
 `fastDummies()`
+package to create dummy variables
 
-creat one dummy:
+- creat one dummy:
 
-```R
+```r
 dataf.2 <- dummy_cols(dataf, select_columns = 'rank')
 ```
 
-Create more than one column (multiple dummies) : 
+- Create more than one column (multiple dummies) : 
 
-```R
+```r
 dataf <- dummy_cols(dataf, select_columns = c('rank', 'discipline'))
 ```
 
-Create dummy and remove columns:
+- Create dummy and remove columns:
 
 ```R
-dataf.2 <- dummy_cols(dataf, select_columns = c('rank', 'discipline'),
-           remove_selected_columns = TRUE)
+dataf.2 <- dummy_cols(dataf, select_columns = c('rank', 'discipline'),remove_selected_columns = TRUE)
 ```
 
-
+***
 
 ## Others
 
- `livecode`	局域网网页直播写代码
+ `livecode`
+ - 局域网网页直播写代码
+
+***
