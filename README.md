@@ -2,7 +2,6 @@
 title: "Untitled"
 author: "Pengfei Luo"
 date: "1/31/2021"
-output: pdf_document
 ---
 
 # R packages
