@@ -4,11 +4,11 @@ Author: pengfei luo.
 
 Update date: 4/30, 2021
 
-## Plotting
+## 1. Plotting
 
-### Packages
+### plot packages
 
-####  `cowplot`
+`cowplot`
 
  - Plot grid for ggplot objects
 
@@ -20,31 +20,42 @@ Update date: 4/30, 2021
 
   https://wilkelab.org/cowplot/articles/index.html
 
-#### `ggfortify`
+
+
+`ggfortify`
 
 - Extension to ggplot2 to handle some popular packages - R software and data visualization
 - e.g. support plot multiple plots for xts objects
 
-#### `ggtheme` 
+
+
+`ggtheme`
 
  - 自动添加ggplot主题
 
- - ```R
-   # using a stata style theme for plots
-   ggplot+theme_stata()
-   # usage is same as
-   ggplot+theme_bw()
-   ```
+```R
+# using a stata style theme for plots
+ggplot+theme_stata()
 
-####  `esquisse`
+# usage is same as
+ggplot+theme_bw()
+```
+
+
+
+`esquisse`
 
  - 免代码ggplot生成器, using ide to obtain ggplot code
 
-####  `ggThemAssist`
+
+
+`ggThemAssist`
 
 - 界面调ggplot代码, using ide to obtain ggplot code
 
-####  `plotly`
+
+
+`plotly`
 
  - 交互界面图, generate interactive plots
 
@@ -53,35 +64,38 @@ Update date: 4/30, 2021
    plotly(ggplot)
    ```
 
-####  `tygraphs`
+
+
+`tygraphs`
 
 - plot mutiple time series
 
  - xts objects
 
-####  `corrplot`
-
- - correlation plot
-
- - <https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html>
-
- - ```R
-   # calculate correlation and save 
-   correlation <- cor(x=numeric vecror/matrix/data frame, na.rm= T or F,
-                      use="everything","all.obs","complete.obs","na.or.complete",
-                      "pairwise.complete.obs",
-                      method= "pearson"(default), "kendall", "spearman"
-   )
-   
-   # plot correlation
-   corrplot(correlation)
-   ```
 
 
+`corrplot`
 
-### combine multiple ggplot objects
+- correlation plot
 
-#### `ggpubr::ggarrange()`
+- <https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html>
+
+```R
+# calculate correlation and save 
+correlation <- cor(
+  x=numeric vecror/matrix/data frame, na.rm= T or F,  use="everything","all.obs","complete.obs","na.or.complete","pairwise.complete.obs",
+  method= "pearson"(default), "kendall", "spearman"
+)
+
+# plot correlation
+corrplot(correlation)
+```
+
+
+
+### combine multiple plots: ggplot objects
+
+`ggpubr::ggarrange()`
 
 - ```R
   ggpubr::ggarrange(p1,p2,p3,p4
@@ -90,29 +104,26 @@ Update date: 4/30, 2021
                   align=c("none", "h", "v", "hv"),
                   common.legend=T)
 
-<br>
-
-#### `gridExtra::grid.arrange()`
 
 
-- ``` R
-  gridExtra::grid.arrange(p1,p2,p3,p4)
-  ```
+`gridExtra::grid.arrange()`
 
-<br>
+``` R
+gridExtra::grid.arrange(p1,p2,p3,p4)
+```
 
-#### `cowplot::plot_grid()`
 
-- ``` R
-  cowplot::plot_grid(p1,p2,p3,p4,
+
+`cowplot::plot_grid()`
+
+```R
+cowplot::plot_grid(p1,p2,p3,p4,
                   align='h')
-  ```
-
-<br>
+```
 
 
 
-#### `patchwork()`
+`patchwork()`
 
 - <https://github.com/thomasp85/patchwork>
 
@@ -135,22 +146,24 @@ p1 + p2
       p4
 ```
 
-<br>
+------
 
-### combine multiple basic plots into one figure
+
+
+### combine multiple plots: basic R
 
 - <https://www.statmethods.net/advgraphs/layout.html>
 
 -   `par()`
 -   `layout()`
 
-<br>
+------
 
 
 
-## tidyverse
+## 2. tidyverse
 
-####  `dyplr`
+#### `dyplr`
 
  data wragling, including functions as follows:
 
@@ -271,165 +284,9 @@ filter(storms,,wind>=25, year %in% 1975:1978)
 
 ####  `tidyr`
 
-- <https://tidyr.tidyverse.org/>, tidyr functions fall into five main categories:
-=======
----
-title: "Untitled"
-author: "Pengfei Luo"
-date: "1/31/2021"
----
+- https://tidyr.tidyverse.org/
 
-# R packages
-
-
-
-<br>
-
-
-
-[TOC]
-
-<br>
-
-
-
-## plotting
-
-### `cowplot`
-
-Plot grid for (ggplot object)
-
-- simple vignettes
-
-  https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html
-
-- Full vignettes
-
-  https://wilkelab.org/cowplot/articles/index.html
-
-### `ggfortify`
-
-- Extension to ggplot2 to handle some popular packages - R software and data visualization
-- e.g. support plot multiple plots for xts objects
-
-### `ggtheme`
-
-- 自动添加ggplot主题
-
-- using a stata style theme for plots
-
- ```r
-ggplot+theme_stata()
-#same as
-ggplot+theme_bw()
- ```
-
-### `esquisse`
-
-免代码ggplot生成器
-
-### `ggThemAssist`
-
-界面调ggplot代码
-
-### `plotly`
-
-交互界面图
-
-```r
-plotly(ggplot)
-```
-
-### `tygraphs`	
-
-- plot mutiple time series
-- xts objects
-
-### `corrplot`
-
-correlation plot
-
-https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html
-
-```R
-# make correlation 
-correlation <- cor(x=numeric vecror/matrix/data frame, na.rm= T or F,
-                   use="everything","all.obs","complete.obs","na.or.complete",
-                   "pairwise.complete.obs",
-                   method= "pearson"(default), "kendall", "spearman"
-)
-# plot correlation
-corrplot(correlation)
-```
-
-###  combine multiple ggplot objects into one figure
-
-`ggpubr::ggarrange()`
-
-```r
-ggpubr::ggarrange(p1,p2,p3,p4
-                  ncol=2,nrow=2,
-                  labels="",label.x= , label.y= ,
-                  align=c("none", "h", "v", "hv"),
-                  common.legend=T)
-```
-
-`gridExtra::grid.arrange()`
-
-```r
-gridExtra::grid.arrange(p1,p2,p3,p4)
-```
-
-`cowplot::plot_grid()`
-
-```r
-cowplot::plot_grid(p1,p2,p3,p4,
-                  align='h')
-```
-
-`patchwork()`
-
-https://github.com/thomasp85/patchwork
-
-```r
-library(ggplot2)
-library(patchwork)
-# make multiple ggplot objects
-p1 <- ggplot(mtcars) + geom_point(aes(mpg, disp))
-p2 <- ggplot(mtcars) + geom_boxplot(aes(gear, disp, group = gear))
-p3 <- ggplot(mtcars) + geom_smooth(aes(disp, qsec))
-p4 <- ggplot(mtcars) + geom_bar(aes(carb))
-# combine plots
-p1 + p2
-# combine plots with latouts
-# 3 plots in first row, 1 plot in second row 
-(p1 | p2 | p3) /
-      p4
-
-```
-
-### combine multiple basic plots into one figure
-
-https://www.statmethods.net/advgraphs/layout.html
-
-- `par()`
-
-- `layout()`
-
-  
-
-<br>
-
-
-
-## 数据处理加工
-
-### `tidyr` package
-
-https://tidyr.tidyverse.org/
-
-tidyr functions fall into five main categories:
->>>>>>> 7c33f65e27b9b9f113b706360b219df36a482645
+- tidyr functions fall into five main categories:
 
 - “Pivotting” which converts between long and wide forms. tidyr 1.0.0 introduces `pivot_longer()` and `pivot_wider()`, replacing the older `spread()` and `gather()` functions. See `vignette("pivot")` for more details.
 - “Rectangling”, which turns deeply nested lists (as from JSON) into tidy tibbles. See `unnest_longer()`, `unnest_wider()`, `hoist()`, and `vignette("rectangle")` for more details.
@@ -443,10 +300,6 @@ functions in `tidyr`package
 
 - `pivot_longer`
 
-  <<<<<<< HEAD
-  =======
-
->>>>>>> 7c33f65e27b9b9f113b706360b219df36a482645
 - `pivot_wider`
 
 (2) handle missing value
@@ -457,7 +310,6 @@ functions in `tidyr`package
 
 (3) Split cells
 
-<<<<<<< HEAD
 -   `separate()` seperate eacha cell in a column to make several columns
 
 -   `seperate_rows` seperate each cell in a column to make several rows
@@ -479,31 +331,7 @@ functions in `tidyr`package
 
 <br>
 
-## data.table
-=======
-- `separate()` seperate eacha cell in a column to make several columns
-- `seperate_rows` seperate each cell in a column to make several rows
 
-- `unite()` collapse cells across several columns to make a single column
-
-### `dyplr`
-
-data wragling
-
-- `mutate()`生成新变量
-- `select()` picks variables based on their names.
-- `filter()` picks cases based on their values.
-- `summarise()` reduces multiple values down to a single summary.
-- `arrange()` changes the ordering of the rows.
-- These all combine naturally with `group_by()` which allows you to perform any operation “by group”. You can learn more about them in `vignette("dplyr")`. As well as these single-table verbs, dplyr also provides a variety of two-table verbs, which you can learn about in `vignette("two-table")`.
-
-### `data.table`
-
-need to finish
-
-another object for tabular data
-
-https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html
 
 ### `lubridate`
 
@@ -519,58 +347,57 @@ out of date, replaced by `tidyr` package
 
 
 
-<br>
->>>>>>> 7c33f65e27b9b9f113b706360b219df36a482645
+------
 
-- need to finish
 
-<<<<<<< HEAD
-- another object for tabular data
 
-- <https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html>
+## 3. data.table
 
-<br>
-=======
+need to finish
 
-## data frame
+another object for tabular data
+
+------
+
+
+
+## 3. data frame
 
 to be finished
 
 
 
-<br>
+------
 
 
 
 ## time series
 
-### `ts` objects
+`ts` objects
 
 - Time Series in R: Quick Reference
 
-https://rstudio-pubs-static.s3.amazonaws.com/404513_6cb313f3258b4c98a5c5948e93ad6c20.html#fn1
-
-### `xts` package
-
-to be finished
+- https://rstudio-pubs-static.s3.amazonaws.com/404513_6cb313f3258b4c98a5c5948e93ad6c20.html#fn1
 
 
 
-<br>
+`xts` package
+
+- to be finished
+
+------
 
 
 
-## Econometrics
+## Econometrics package
 
-### `MASS` package
+`MASS` package
 
-经典的统计方法
+- 经典的统计方法
 
-### `forecast` package
+`forecast` package
 
-???
-
- to be finished
+- ??? to be finished
 
 
 
@@ -582,7 +409,7 @@ to be finished
 
 https://elsur.jpn.org/mt/2020/02/002830.html
 
-### `tseries` package
+`tseries` package
 
 時系列分析パッケージの古手だと思う。ADF検定, KPSS検定, PP検定の関数を持っている。
 
@@ -590,7 +417,9 @@ https://elsur.jpn.org/mt/2020/02/002830.html
 - `kpss.test()` KPSS test
 - `pp.test() `PP test
 
-### `urca` package
+
+
+`urca` package
 
 　単位根検定のためのパッケージとして最も有名なのはこれだと思う。
 
@@ -598,132 +427,60 @@ https://elsur.jpn.org/mt/2020/02/002830.html
 - `ur.kpss(y, type, lags, selectlags)` KPSS
 - `ur.pp(y, type, lags, selectlags)` PP test
 
-### `forecast` package
+
+
+`forecast` package
 
 泣く子も黙る(?) 有名パッケージ。中の人Hyndman先生は、ただいまこのパッケージのtidyverse対応版であるfableパッケージを鋭意ご製作中らしいのだが、単位根検定関係はまだ移植していない模様。
 
-<br>
+------
 
 
-
-## Descriptive statistics
-
-### `summary()`
-
-basic R function
-
-### `psych::describe()`
->>>>>>> 7c33f65e27b9b9f113b706360b219df36a482645
-
-## time series
-
-####  `ts` objects
-
--   Time Series in R: Quick Reference
-
-<<<<<<< HEAD
-- <https://rstudio-pubs-static.s3.amazonaws.com/404513_6cb313f3258b4c98a5c5948e93ad6c20.html#fn1>
-
- `xts` package
-=======
 
 
 ## VAR model
 
-### `vars` package
+`vars` package
 
 VAR model, SVAR model
 
-### `VARsignR` package
+`VARsignR` package
 
-Uhlig's (2005) sign restricted VAR model
->>>>>>> 7c33f65e27b9b9f113b706360b219df36a482645
+- Uhlig's (2005) sign restricted VAR model
 
-to be finished
+- to be finished
 
-<br>
-
-<<<<<<< HEAD
+------
 
 
-## statistics
-=======
 ## GARCH model
 
-### `rugarch`	单变量garch
+`rugarch`	单变量garch
 
-###  `rmgarch`	多变量garch,引用‘’‘rugarch’‘’功能
->>>>>>> 7c33f65e27b9b9f113b706360b219df36a482645
+`rmgarch`	多变量garch,引用‘’‘rugarch’‘’功能
 
-####  `MASS`
+------
 
- - 经典的统计方法
 
-<<<<<<< HEAD
-####  `forecast`
-=======
-<br>
->>>>>>> 7c33f65e27b9b9f113b706360b219df36a482645
 
- - ???, forcasting time series data
 
-<<<<<<< HEAD
-<br>
 
-## unit root test
-=======
 
-## financial data 金融データ、取得、処理
-
-### `quantmod`
->>>>>>> 7c33f65e27b9b9f113b706360b219df36a482645
-
-- <https://elsur.jpn.org/mt/2020/02/002830.html>
-
-#### `tseries` package
-
-時系列分析パッケージの古手だと思う。ADF検定, KPSS検定, PP検定の関数を持っている。
-
-- ```R
-  #ADF test
-  add.test() 
-  #KPSS test
-  kpss.test()
-  #PP test
-  pp.test()
-  ```
-
-#### `urca` package
-
-　単位根検定のためのパッケージとして最も有名なのはこれだと思う。
-
-- ```R
-  # ADF
-  ur.df(y, type, lags, selectlags)
-  # KPSS
-  ur.kpss(y, type, lags, selectlags)
-  # PP test
-  ur.pp(y, type, lags, selectlags)
-  ```
-
-#### `forecast` package
-
-泣く子も黙る(?) 有名パッケージ。中の人Hyndman先生は、ただいまこのパッケージのtidyverse対応版であるfableパッケージを鋭意ご製作中らしいのだが、単位根検定関係はまだ移植していない模様。
-
-<br>
 
 ## Descriptive statistics
 
-####  `summary()`	
+### Package
+
+`summary()`
 
  - basic package for summarize descriptive statistics
 
-####  `psych::describe()`
+`psych::describe()`
 
 - descriptive statistics
 - for multiple series data: describe(df)/ as.data.table(df, describe(变量),by=分组条件变量)
 
-### Describe data using pokemon data
+### example: describe data using pokemon data
 
 -   <https://www.youtube.com/watch?v=ZA28sOmq7nU>
 
@@ -762,74 +519,37 @@ as.data.table(pokemon)[,describe(Atk),by=Type.I]
 
 <br>
 
-## VAR model
-
-`vars` package
-
-- VAR model, SVAR model
-
-`VARsignR` package
-
-Uhlig's (2005) sign restricted VAR model
-
-<br>
 
 
 
-## GARCH model
 
- `rugarch`
- - 单变量garch, univariate GARCH
 
- `rmgarch`
- - 多变量garch, multivariate GARCH
- - 引用`rugarch`功能
-
-<br>
 
 
 
 ## financial data fetch & solution
 
- `quantmod` 
+ `quantmod` package
 
  relative packages for getting and solving financial time series data from internet open source
 
 - `getsymbols()`
 
+
 - `chart???()`
+- `PerformanceAnalystic``
 
-<<<<<<< HEAD
-``PerformanceAnalystic`
-
-`tidyquant()`
+`tidyquant()` package
 
 - <https://cran.r-project.org/web/packages/tidyquant/vignettes/TQ00-introduction-to-tidyquant.html>
-=======
-### `PerformanceAnalystic`
+- http://delta0726.web.fc2.com/packages/finance/tidyquant.html
+------
 
-### `tidy quant()`
 
-https://cran.r-project.org/web/packages/tidyquant/vignettes/TQ00-introduction-to-tidyquant.html
 
-http://delta0726.web.fc2.com/packages/finance/tidyquant.html
-
->>>>>>> 7c33f65e27b9b9f113b706360b219df36a482645
-
-- <http://delta0726.web.fc2.com/packages/finance/tidyquant.html>
-
-<<<<<<< HEAD
-***
-
-## 统计结果输出 (results output)
-
-###  `stargazer`	
-
-- 统计结果输出, like **xreg2** package in Stata
-=======
 ## output model results 模型结果输出
 
-### `stargazer`
+#### `stargazer` package
 
 统计结果输出, like xreg2 in Stata, 内置格式e.g. AER
 
@@ -843,8 +563,6 @@ stargazar(fit1,fit2,fit3,fit4,
           
           
 ```
->>>>>>> 7c33f65e27b9b9f113b706360b219df36a482645
-
 - 内置格式e.g. AER
 
 ``` R
@@ -856,14 +574,13 @@ stargazar(fit1,fit2,fit3,fit4,
           )
 ```
 
-### `apaTables`
+`apaTables` package
 
-<<<<<<< HEAD
-???直接一键输出APA格式的表格到word文件
+-  ???直接一键输出APA格式的表格到word文件
 
-### `texreg:screen()`
+#### `texreg:screen()` function
 
-show multiple model results in screen for comparison
+- show multiple model results in screen for comparison
 
 ``` R
 screenreg(list(twoway_effects, twoway_effects_hac),
@@ -880,35 +597,7 @@ The broom package takes the messy output of built-in functions in R, such as `lm
 - `broom::tidy(modelfit)` give a summary like `coef(summary(modelfit))`
 
 - `broom::augment(modelfit)` give a tabular result data representation
-=======
-### `apaTables`
-
-???直接一键输出APA格式的表格到word文件
-
-### `texreg:screen()`
-
-show multiple model results in screen for comparison
-
-```R
-screenreg(list(twoway_effects, twoway_effects_hac),
-          custom.model.names = c("Twoway Fixed Effects","Twoway Fixed Effects (HAC)"),
-          digits=2, # output number digit
-          stars=c(0.001,0.01,0.05,0.1) # up to 4 p-values
-         )
-
-```
->>>>>>> 7c33f65e27b9b9f113b706360b219df36a482645
-
-### `broom`
-
-<<<<<<< HEAD
-***
-=======
-The broom package takes the messy output of built-in functions in R, such as `lm`, `nls`, or `t.test`, and turns them into tidy tibbles.
-
-`broom::tidy(modelfit)` give a summary like `coef(summary(modelfit))`
-
-`broom::augment(modelfit)` give a tabular result data representation
+------
 
 
 
@@ -932,36 +621,9 @@ Guidance
 
    https://www.ucl.ac.uk/~uctqiax/PUBLG100/2016/week8/seminar8.html#
 
+------
 
 
-## Dummy variable
->>>>>>> 7c33f65e27b9b9f113b706360b219df36a482645
-
-
-## panel regression model
-
-<<<<<<< HEAD
-####  `plm`
-=======
-### `ifelse()`
->>>>>>> 7c33f65e27b9b9f113b706360b219df36a482645
-
- - panel model regression
- - like `xtreg` in stata
-
-Guidance:
-
-- 太郎丸 博(京都大学)
-
-  <http://tarohmaru.web.fc2.com/R/RBasics.html>
-
-- Rで推定する回帰モデル入門　Sho Kuroda (黒田 翔)
-
-  <https://rstudio-pubs-static.s3.amazonaws.com/273098_93ddbae82f76423aa80d3089e07a7bb6.html#glm->
-
-- Panel Data, Time-Series Cross-Section Models, *Introduction to Quantitative Methods*
-
-  <https://www.ucl.ac.uk/~uctqiax/PUBLG100/2016/week8/seminar8.html#>
 
 ## How to create dummy variables
 - https://www.marsja.se/create-dummy-variables-in-r/#:~:text=A%20dummy%20variable%20is%20a,%2Fyes%20or%20off%2Fon.
@@ -969,48 +631,45 @@ Guidance:
 #### `ifelse()`
 
 - basic R functions
+
 ```r
-dataf$Disc_A <- ifelse(dataf$discipline == 'A', 1, 0) dataf$Disc_B <- ifelse(dataf$discipline == 'B', 1, 0)
+dataf$Disc_A <- ifelse(dataf$discipline == 'A', 1, 0)
+dataf$Disc_B <- ifelse(dataf$discipline == 'B', 1, 0)
 ```
 
-<<<<<<< HEAD
-#### `fastDummies()`
-=======
-### `fastDummies()`
->>>>>>> 7c33f65e27b9b9f113b706360b219df36a482645
 
-package to create dummy variables
+#### `fastDummies()`
+
+- package to create dummy variables
 
 - creat one dummy:
 
 ```r
-dataf.2 <- dummy_cols(dataf, select_columns = 'rank')
+dataf.2 <- dummy_cols(dataf, 
+                      select_columns = 'rank')
 ```
 
 - Create more than one column (multiple dummies) : 
 
 ```r
-dataf <- dummy_cols(dataf, select_columns = c('rank', 'discipline'))
+dataf <- dummy_cols(dataf, 
+                    select_columns = c('rank', 'discipline'))
 ```
 
 - Create dummy and remove columns:
 
 ```R
-dataf.2 <- dummy_cols(dataf, select_columns = c('rank', 'discipline'),remove_selected_columns = TRUE)
+dataf.2 <- dummy_cols(dataf, 
+                      select_columns = c('rank', 'discipline'),
+                      remove_selected_columns = TRUE)
 ```
 
 ***
 
-# Others
-
-### `livecode`	局域网网页直播写代码
 
 
-<<<<<<< HEAD
-####  `livecode`
+## # Others
 
- - 局域网网页直播写代码
+`livecode`
 
-***
-=======
->>>>>>> 7c33f65e27b9b9f113b706360b219df36a482645
+- 局域网网页直播写代码
