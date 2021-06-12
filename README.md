@@ -1,11 +1,9 @@
-# useful R packages and functions
-
+---
+title: useful R packages and functions
 Author: pengfei luo. 
-
 Update date: 4/30, 2021
 
-[TOC]
-
+---
 
 
 ## 1. Plotting
@@ -383,11 +381,68 @@ to be finished
 
 - https://rstudio-pubs-static.s3.amazonaws.com/404513_6cb313f3258b4c98a5c5948e93ad6c20.html#fn1
 
-
-
 `xts` package
 
-- to be finished
+
+
+`quantmod`  package
+
+`MTS` package
+
+- diffM() function: take difference  of multivariate time series in one XTS
+
+### Covert  time series frequency
+
+- method 1: using basic R
+  - Converting a Daily, Weekly, or Monthly Series to Quarterly in R, https://www.youtube.com/watch?v=9v8n9oZTo7w
+
+```R
+library(dplyr)
+library(lubridate)
+# data include daily date and value
+data<- read_csv('path') #import data from csv
+
+data$Date=as.Date(data$Date, format='%m/%d/%y') 
+data<- arrange(data, Date) # arrange value by Date in data
+data$qdate<- as.yearqtr(data$Date) # generate quarterly date 
+data_qtrly <- data %>% 
+              group_by(qdate)%>%
+						summarise_all(mean)  # convert daily to quarterly data
+
+write.csv(data_qtrly, "path")
+
+```
+
+
+
+- method 2: using lubridate::floor_date()
+
+```R
+library(dplyr)
+library(lubridate)
+# data include daily date and value
+data<- read_csv('path') #import data from csv
+
+# 
+df %>% 
+  mutate(week = month(ymd(date))) %>% 
+  group_by(month)%>%
+	summarise_all(mean)
+# in lubridate package: month(),quarter(),year(),....
+
+```
+
+
+
+
+
+
+
+
+
+
+
+- 
 
 ------
 
