@@ -22,8 +22,9 @@ editor_options:
     wrap: 72
 ---
 
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE )
+knitr::opts_chunk$set(eval = FALSE, echo = TRUE )
 ```
 ```
 
@@ -40,10 +41,10 @@ knitr::opts_chunk$set(echo = TRUE )
 #### `ggtheme` package
 
 -   自动添加ggplot主题
-    ```{r}
-    data(iris)
-    ```
 
+```{r}
+data(iris)
+```
 
 
 #### `esquisse` package
@@ -97,13 +98,16 @@ knitr::opts_chunk$set(echo = TRUE )
 
 #### `ggpubr::ggarrange()`
 
--   example:
+-   example:`ts()`
 
     ```{r eval=FALSE}
     ggpubr::ggarrange(p1,p2,p3,p4 ncol=2,nrow=2, labels="",label.x= , label.y= , align=c("none", "h", "v", "hv"), common.legend=T)
     ```
 
 #### `gridExtra::grid.arrange()`
+```{r}
+
+```
 
 -   example:
 

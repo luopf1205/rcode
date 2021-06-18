@@ -152,14 +152,28 @@ p1 + p2
 
 ------
 
+#### reorder facet
+
+```R
+# p:ggplot2 object
+# data: dataframe object,including country, x, y
+p+facet_grid(~.country)
+
+reorder the country
+p+facet_grid(~factor(country,levels=c('japan','china','korea')))
+```
+
+
+
 
 
 ### combine multiple plots: basic R
 
 - <https://www.statmethods.net/advgraphs/layout.html>
-
 -   `par()`
 -   `layout()`
+
+### 
 
 ------
 
