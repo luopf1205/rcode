@@ -6,7 +6,9 @@ Update date: 4/30, 2021
 
 
 
-[TOC]
+[toc]
+
+
 
 ## 1. Plotting
 
@@ -154,6 +156,8 @@ p1 + p2
 
 #### reorder facet
 
+- Example 1
+
 ```R
 # p:ggplot2 object
 # data: dataframe object,including country, x, y
@@ -161,6 +165,27 @@ p+facet_grid(~.country)
 
 reorder the country
 p+facet_grid(~factor(country,levels=c('japan','china','korea')))
+```
+
+- example 2
+
+```R
+library(tidyverse)
+# download data
+quantmod::getSymbols(Symbols = 'GOOG')
+goog=data.frame(index(GOOG),GOOG)
+colnames(goog)=c('date','open','high','low','close','volumn','adj')
+
+# convert to long data
+goog1=goog %>% pivot_longer(-date,names_to = 'indicator',values_to = 'price')
+head(goog1)
+
+# plot
+p <- goog1 %>% filter(indicator!='volumn' & indicator!='adj') %>% 
+  ggplot(aes(x = date,y=price))+
+  geom_line()+
+  theme_bw()+
+  facet_grid(~factor(indicator,levels = c('open','high','low','close'))) # reorder facet
 ```
 
 
@@ -381,7 +406,11 @@ another object for tabular data
 
 ## 3. data frame
 
-to be finished
+#### Divide all columns by the value from the 2nd column - apply for all rows
+
+```R
+tbl_data[, -(1:2)] <- sweep(tbl_data[, -(1:2)], 1, tbl_data[, 2], "/")
+```
 
 
 
