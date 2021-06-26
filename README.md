@@ -414,6 +414,30 @@ tbl_data[, -(1:2)] <- sweep(tbl_data[, -(1:2)], 1, tbl_data[, 2], "/")
 
 
 
+####  Join/merge multiple data.frames
+
+- using `merge()` and pipe operator
+
+- using `join()` function in dyplr package and pipe operator
+
+- using function
+
+  - https://gist.github.com/yuu-ito/7094938 
+
+  - Rのmerge関数で3つ以上のデータフレームを結合したかったので。 ググって見つけたものをまとめておく。
+
+  - ```R
+    merge2 <- function(dfs, ...)
+    {
+    　 # res <- merge2(list(Df1, Df2, Df3), by="ID")
+    　 base <- dfs[1]
+    　 lapply(dfs[-1], function(i) base <<- merge(base, i, ...)) # [1]
+      return(base)
+    }
+    ```
+
+    
+
 ------
 
 
