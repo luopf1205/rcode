@@ -436,7 +436,21 @@ tbl_data[, -(1:2)] <- sweep(tbl_data[, -(1:2)], 1, tbl_data[, 2], "/")
     }
     ```
 
-    
+#### merge multiple data.frames and add a row of data.frame names
+
+- Usage: combine country data to a panel data
+
+- https://stackoverflow.com/questions/15162197/combine-rbind-data-frames-and-create-column-with-name-of-original-data-frames
+
+- ```r
+  > library(gdata)
+  > gdata::combine(df1, df2)
+    x y source
+  1 1 2    df1
+  2 3 4    df1
+  3 5 6    df2
+  4 7 8    df2
+  ```
 
 ------
 
