@@ -579,7 +579,6 @@ https://elsur.jpn.org/mt/2020/02/002830.html
 
 
 
-
 ## VAR model
 
 `vars` package
@@ -589,8 +588,66 @@ VAR model, SVAR model
 `VARsignR` package
 
 - Uhlig's (2005) sign restricted VAR model
-
 - to be finished
+
+### nice plot for impulse response
+
+```R
+# load package
+library(vars)
+library(ResearchGroupTools)
+library(tidyverse)
+
+# load data----
+data("Canada")
+summary(Canada)
+plot(Canada,nc=2,xlab="")
+#tip: canada is a mts/ts object
+
+VARselect(Canada, lag.max = 8, type = "both")
+Canada <- Canada[, c("prod", "e", "U", "rw")]
+#tip: object class: mts/ts/matrix
+VAR1 <- VAR(Canada, p = 1, type = "both")
+
+# draw IRF plots as ggplot objects and combine
+p1 <- VAR1 %>%  impulseResponsePlot(impulse = "prod", response = "prod", n.ahead = 20)+
+  labs(title = "prod -> prod",x='',y='')
+p2 <- VAR1 %>%  impulseResponsePlot(impulse = "e", response = "prod", n.ahead = 20)+
+  labs(title = "e -> prod",x='',y='')
+p3 <- VAR1 %>%  impulseResponsePlot(impulse = "rw", response = "prod", n.ahead = 20)+
+  labs(title = "rw -> prod",x='',y='')
+p4 <- VAR1 %>%  impulseResponsePlot(impulse = "e", response = "prod", n.ahead = 20)+
+  labs(title = "e -> prod",x='',y='')
+p5 <- VAR1 %>%  impulseResponsePlot(impulse = "prod", response = "e", n.ahead = 20)+
+  labs(title = "prod -> e",x='',y='')
+p6 <- VAR1 %>%  impulseResponsePlot(impulse = "e", response = "e", n.ahead = 20)+
+  labs(title = "e -> e",x='',y='')
+p7 <- VAR1 %>%  impulseResponsePlot(impulse = "U", response = "e", n.ahead = 20)+
+  labs(title = "U -> e",x='',y='')
+p8 <- VAR1 %>%  impulseResponsePlot(impulse = "rw", response = "e", n.ahead = 20)+
+  labs(title = "rw -> e",x='',y='')
+p9 <- VAR1 %>%  impulseResponsePlot(impulse = "prod", response = "U", n.ahead = 20)+
+  labs(title = "prod -> U",x='',y='')
+p10 <- VAR1 %>%  impulseResponsePlot(impulse = "e", response = "U", n.ahead = 20)+
+  labs(title = "e -> U",x='',y='')
+p11 <- VAR1 %>%  impulseResponsePlot(impulse = "U", response = "U", n.ahead = 20)+
+  labs(title = "U -> U",x='',y='')
+p12 <- VAR1 %>%  impulseResponsePlot(impulse = "rw", response = "U", n.ahead = 20)+
+  labs(title = "rw -> U",x='',y='')
+p13 <- VAR1 %>%  impulseResponsePlot(impulse = "prod", response = "rw", n.ahead = 20)+
+  labs(title = "prod -> rw",x='',y='')
+p14 <- VAR1 %>%  impulseResponsePlot(impulse = "e", response = "rw", n.ahead = 20)+
+  labs(title = "e -> rw",x='',y='')
+p15 <- VAR1 %>%  impulseResponsePlot(impulse = "U", response = "rw", n.ahead = 20)+
+  labs(title = "U -> rw",x='',y='')
+p16 <- VAR1 %>%  impulseResponsePlot(impulse = "rw", response = "rw", n.ahead = 20)+
+  labs(title = "rw -> rw",x='',y='')
+
+# combine plots 4 x 4
+gridExtra::grid.arrange(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16)
+```
+
+
 
 ------
 
@@ -720,7 +777,7 @@ stargazar(fit1,fit2,fit3,fit4,
 
 -  ???直接一键输出APA格式的表格到word文件
 
-#### `texreg:screen()` function
+#### `texreg:screenreg()` function
 
 - show multiple model results in screen for comparison
 
