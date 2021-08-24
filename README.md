@@ -517,15 +517,50 @@ df %>%
 
 
 
+### calculate returns and log returns
+
+```R
+library(tidyverse)
+
+# group1
+date=seq(as.Date("2000/1/1"), by='month', length.out=15)
+y=c(1,2,3,4,5,1,2,3,4,5,1,2,3,4,5)
+data1 <- data.frame(date,y) %>% mutate(id='a')
+data1
+
+# group2
+date=seq(as.Date("2000/1/1"), by='month', length.out=15)
+y=c(15,20,25,45,55,15,20,25,45,55,15,20,25,45,55)
+data2 <- data.frame(date,y) %>% mutate(id='b')
+data2
+
+# combine all data groups
+data <- merge(data1,data2,all=TRUE)
+
+## 1. for one group (data.frame)
+## 1st difference (first value: NA)
+data1%>%mutate(dy=y-lag(y))
+
+## return (first value: NA)
+data1 %>% mutate(dy=(y-lag(y))/lag(y))
+# return in percentage (first value: NA)
+data1 %>% mutate(dy=(y-lag(y))/lag(y)*100)
+or 
+data1 %>% mutate(dy=(y/lag(y))*100-100)
+
+## log returns for one group
+data1 %>% mutate(dy=log(y)-lag(log(y)))
+data1 %>% mutate(dy=(log(y)-lag(log(y))*100)) # in percentage
+data1 %>% mutate(dy=(
+  100*log(y)-100*lag(log(y))
+))
 
 
+## calculate returns/log returns for one group in panel data
+data %>% group_by(id) %>% mutate(dy=y-lag(y))
+## calculate returns/log returns for one group
 
-
-
-
-
-
-- 
+```
 
 ------
 
