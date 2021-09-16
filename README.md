@@ -454,6 +454,69 @@ tbl_data[, -(1:2)] <- sweep(tbl_data[, -(1:2)], 1, tbl_data[, 2], "/")
 
 ------
 
+## pipe operator (migrittr package)
+
+### %>%
+
+forward pipe operator
+
+```R
+# without pipe
+lm(Sepal.Length ~ Sepal.Width, data=iris)
+# with pipe (第一个参数不能放入iris, 报错)
+iris %>% lm(Sepal.Length ~ Sepal.Width)
+# with pipe (准确告知iris应该放入哪个参数,不报错)
+iris %>% lm(Sepal.Length ~ Sepal.Width, data=.)
+```
+
+### %$%
+
+exposition pipe-operator
+
+准确告知上一段的运行结果放入下一个函式的data参数中
+
+```R
+iris %$% lm(Sepal.Length ~ Sepal.Width)
+```
+
+
+
+### %T>% 
+
+tee operarator
+
+主要作用: 通过pipe生成数据集, 返回新的数据集,并画图or统计分析(mean, etc.), 不为画图或统计分析生成新的变量
+
+```R
+# without pipe
+set.seed(1)
+test<- rnorm(200) %>% matrix(ncol=2)
+plot(test)
+colSums(test)
+
+# with pipe (通过%T>%分别将test传入plot()和colSums())
+set.seed(1)
+test<- rnorm(200) %>% matrix(ncol=2)
+
+test %T>% 
+     plot() %>%
+     colSums()
+```
+
+### %<>%
+
+compound assignment pipe-operator
+
+将右边执行完的结果传入左边
+
+```R
+# without pipe
+iris <- iris %>% filter(Species == "virginica") %>% arrange(Sepal.Length)
+
+# with pipe
+iris %<>%  filter(Species == "virginica") %>% arrange(Sepal.Length)
+```
+
 
 
 ## time series
@@ -855,12 +918,29 @@ Guidance
 
    https://www.ucl.ac.uk/~uctqiax/PUBLG100/2016/week8/seminar8.html#
 
+### using pipe operator for plm/lm
+
+not %>%, but %$%, 将上一个结果准确传入下一个函数的data参数
+
+```R
+pdata %$% plm()
+data %$% lm()
+```
+
+
+
 ------
 
 
 
 ## How to create dummy variables
 - https://www.marsja.se/create-dummy-variables-in-r/#:~:text=A%20dummy%20variable%20is%20a,%2Fyes%20or%20off%2Fon.
+
+#### one line code to generate time dummy
+
+```r
+data$dummy <- as.numeric(data$date >= "2018-01-01")
+```
 
 #### `ifelse()`
 
@@ -907,3 +987,5 @@ dataf.2 <- dummy_cols(dataf,
 `livecode`
 
 - 局域网网页直播写代码
+
+  
