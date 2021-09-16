@@ -4,6 +4,10 @@ Author: pengfei luo.
 Update date: 4/30, 2021
 ---
 
+[toc]
+
+
+
 
 
 [toc]
@@ -394,7 +398,7 @@ out of date, replaced by `tidyr` package
 
 
 
-## 3. data.table
+## 3. data.table (unfinished)
 
 need to finish
 
@@ -404,7 +408,7 @@ another object for tabular data
 
 
 
-## 3. data frame
+## 4. data frame
 
 #### Divide all columns by the value from the 2nd column - apply for all rows
 
@@ -454,7 +458,7 @@ tbl_data[, -(1:2)] <- sweep(tbl_data[, -(1:2)], 1, tbl_data[, 2], "/")
 
 ------
 
-## pipe operator (migrittr package)
+## 5. pipe operator (migrittr package)
 
 ### %>%
 
@@ -519,7 +523,7 @@ iris %<>%  filter(Species == "virginica") %>% arrange(Sepal.Length)
 
 
 
-## time series
+## 6. time series
 
 `ts` objects
 
@@ -629,7 +633,7 @@ data %>% group_by(id) %>% mutate(dy=y-lag(y))
 
 
 
-## Econometrics package
+## 7. Econometrics package
 
 `MASS` package
 
@@ -645,7 +649,7 @@ data %>% group_by(id) %>% mutate(dy=y-lag(y))
 
 
 
-## unit root test
+## 8.  unit root test
 
 https://elsur.jpn.org/mt/2020/02/002830.html
 
@@ -677,7 +681,9 @@ https://elsur.jpn.org/mt/2020/02/002830.html
 
 
 
-## VAR model
+## 9. VAR model
+
+### Packages for VAR model
 
 `vars` package
 
@@ -749,12 +755,21 @@ gridExtra::grid.arrange(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16)
 
 ------
 
+## 10. GARCH model
 
-## GARCH model
+### `rugarch`
 
-`rugarch`	单变量garch
+单变量garch
 
-`rmgarch`	多变量garch,引用‘’‘rugarch’‘’功能
+### `rmgarch`
+
+多变量garch,引用‘’‘rugarch’‘’功能
+
+### `garchmodels`
+
+a tidymodel framework for garch models package (`rugarch` and `rmgarch`)
+
+https://albertoalmuinha.github.io/garchmodels/
 
 ------
 
@@ -764,9 +779,9 @@ gridExtra::grid.arrange(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16)
 
 
 
-## Descriptive statistics
+## 11. Descriptive statistics
 
-### Package
+### Package for descriptive statistics
 
 `summary()`
 
@@ -824,7 +839,7 @@ as.data.table(pokemon)[,describe(Atk),by=Type.I]
 
 
 
-## financial data fetch & solution
+## 12. financial data fetch & solution
 
  `quantmod` package
 
@@ -844,9 +859,9 @@ as.data.table(pokemon)[,describe(Atk),by=Type.I]
 
 
 
-## output model results 模型结果输出
+## 13. output model results 模型结果输出
 
-#### `stargazer` package
+### `stargazer` package
 
 统计结果输出, like xreg2 in Stata, 内置格式e.g. AER
 
@@ -871,11 +886,11 @@ stargazar(fit1,fit2,fit3,fit4,
           )
 ```
 
-`apaTables` package
+### `apaTables` package
 
 -  ???直接一键输出APA格式的表格到word文件
 
-#### `texreg:screenreg()` function
+### `texreg:screenreg()` function
 
 - show multiple model results in screen for comparison
 
@@ -898,7 +913,7 @@ The broom package takes the messy output of built-in functions in R, such as `lm
 
 
 
-## panel regression model
+## 14. panel regression model
 
 ### `plm`
 
@@ -918,7 +933,7 @@ Guidance
 
    https://www.ucl.ac.uk/~uctqiax/PUBLG100/2016/week8/seminar8.html#
 
-### using pipe operator for plm/lm
+### using pipe operator for `plm()`/`lm()`
 
 not %>%, but %$%, 将上一个结果准确传入下一个函数的data参数
 
@@ -933,16 +948,17 @@ data %$% lm()
 
 
 
-## How to create dummy variables
+## 15. How to create dummy variables
+
 - https://www.marsja.se/create-dummy-variables-in-r/#:~:text=A%20dummy%20variable%20is%20a,%2Fyes%20or%20off%2Fon.
 
-#### one line code to generate time dummy
+### one line code to generate time dummy
 
 ```r
 data$dummy <- as.numeric(data$date >= "2018-01-01")
 ```
 
-#### `ifelse()`
+### `ifelse()`
 
 - basic R functions
 
@@ -951,8 +967,7 @@ dataf$Disc_A <- ifelse(dataf$discipline == 'A', 1, 0)
 dataf$Disc_B <- ifelse(dataf$discipline == 'B', 1, 0)
 ```
 
-
-#### `fastDummies()`
+### `fastDummies()`
 
 - package to create dummy variables
 
