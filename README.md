@@ -220,6 +220,13 @@ p <- goog1 %>% filter(indicator!='volumn' & indicator!='adj') %>%
 
 - `filter()` picks cases based on their values.
 
+- ```R
+  country=c('China','Japan','Korea','Hong Kong','Brunei','Combodia','Indonesia','Laos','Malaysia','Myanmar','Philippines','Singapore','Thailand','Vietnam')
+  data %>% filter(location %in% country) 
+  ```
+
+  
+
 - `summarise()` reduces multiple values down to a single summary.
 
 - `arrange()` changes the ordering of the rows.
