@@ -640,6 +640,41 @@ data %>% group_by(id) %>% mutate(dy=y-lag(y))
 
 
 
+## XTS
+
+### Get and merge closing data from quantmod
+
+
+
+```R
+library(quantmod)
+e<-new.env()
+tickers<-c("GE","BMW.DE","NOVO-B.CO","1COV.DE")
+getSymbols("^GSPC",from="2018-01-01")
+getSymbols(tickers,from="2019-01-01",env=e)
+
+merged_prices <- do.call(merge, lapply(e, Ad))
+merged_prices
+
+library(tidyverse)
+library(ggfortify)
+autoplot(merged_prices,facets = FALSE)
+
+
+```
+
+### Divide each row of an XTS or ZOO time series object by a fixed row (a value on a Date)
+
+```R
+
+
+data <- merged_prices/drop(coredata(merged_prices['2020-01-06']))*100 
+
+autoplot(data)
+```
+
+
+
 ## 7. Econometrics package
 
 `MASS` package
@@ -1010,4 +1045,4 @@ dataf.2 <- dummy_cols(dataf,
 
 - 局域网网页直播写代码
 
-  
+  ###### 

@@ -1,0 +1,47 @@
+---
+title: "daily exchange rate"
+author: "Pengfei Luo"
+date: "9/26/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## get daily exchange rate from yahoo
+
+```{r}
+library(quantmod)
+install.packages("remotes")
+remotes::install_github("jeanmarcgp/xtsanalytics",force = TRUE)
+library(tidyverse)
+library(ggfortify)
+
+
+# CHANGE: data
+# set symbols and daily period
+tickers <- c('CNY=X','HKD=X','JPY=X','KRW=X','BND=X','KHR=X','IDR=X','LAK=X','MYR=X','MMK=X','PHP=X','SGD=X','THB=X','VND=X')
+start.date <- as.Date('2005-01-01')
+end.date <- as.Date('2021-06-30')
+
+# NO NEED TO CHANGE
+# get multiple data and store into a XTS object
+exchangerate <- xtsanalytics::mget_symbols(tickers, from = start.date, to=end.date, OHLC='Cl',periodicity='monthly',src = 'yahoo')
+
+
+# CHANGE: name
+colnames(exchangerate) <- c('China','HongKong','Japan','Korea','Brunei','Cambodia','Indonesia','Laos','Malaysia','Myanmar','Philippines','Singapore','Thailand','Vietnam')
+head(exchangerate)
+autoplot(exchangerate,ncol = 5)
+
+# frequency: daily to monthly, closing
+
+
+
+```
+
+```{r}
+
+```
+
