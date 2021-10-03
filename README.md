@@ -1039,10 +1039,35 @@ dataf.2 <- dummy_cols(dataf,
 
 
 
-## # Others
+##  Other task in my research
 
-`livecode`
+### calculate weighted average on multiple time series (unfinished)
 
-- 局域网网页直播写代码
+- e.g. for calculation of country-specific GEPU from country EPU and GDP data
 
-  ###### 
+- https://stackoverflow.com/questions/9864631/weighted-mean-by-row
+
+- Method: take weighted average for every rows in a dataframe
+
+- ```R
+  # indicators for a,b,c; can be country EPU data
+  a=c(1:10)
+  b=c(16:25)
+  c=c(24:33)
+  # weights for a,b,c; can be country GDP
+  wa=c(3,7,3,3,3,3,3,3,3,1)
+  wb=c(3,2,3,3,3,3,3,3,3,8)
+  wc=c(4,1,4,4,4,4,4,4,4,1)
+  # combined data
+  z=data.frame(a,b,c,wa,wb,wc)
+  
+  # method 1
+  apply(z, 1, function(x) weighted.mean(x[1:3], x[4:6]))
+   [1] 14.7  7.3 16.7 17.7 18.7 19.7 20.7 21.7 22.7 24.3
+  # method 2
+  rowSums(z[,1:3] * z[,4:6]) / rowSums(z[,4:6])
+   [1] 14.7  7.3 16.7 17.7 18.7 19.7 20.7 21.7 22.7 24.3
+  # deal with NA in dataframe
+  # weighted.mean(..., na.rm=T)
+  # rowSums() supports the na.rm argument, so it should work for that one as well.
+  ```
