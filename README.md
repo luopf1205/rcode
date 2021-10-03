@@ -1039,7 +1039,7 @@ dataf.2 <- dummy_cols(dataf,
 
 
 
-##  Other task in my research
+##  Other research tasks
 
 ### calculate weighted average on multiple time series (unfinished)
 
@@ -1071,3 +1071,42 @@ dataf.2 <- dummy_cols(dataf,
   # weighted.mean(..., na.rm=T)
   # rowSums() supports the na.rm argument, so it should work for that one as well.
   ```
+
+### make 3D surface plot (unfinished)
+
+- make 3D surface plot of TVP-VAR impulse responses
+
+- https://stackoverflow.com/questions/60369552/how-do-i-create-a-3d-surface-plot-in-r-if-i-have-a-dataframe-of-3-columns
+
+- ```R
+  # data
+  df <- read.table(text =
+      "           x             y        z
+  1        0.50          0.50 48530.98
+  2        0.50          0.51 49029.34
+  3        0.50          0.52 49576.12
+  4        0.50          0.53 50161.22
+  5        0.50          0.54 50752.05
+  6        0.50          0.55 51354.43
+  7        0.50          0.56 51965.09
+  8        0.50          0.57 38756.51
+  9        0.50          0.58 39262.34
+  10       0.50          0.59 39783.68
+  11       0.51          0.60 41052.09
+  12       0.51          0.61 41447.51
+  13       0.51          0.62 26972.85
+  14       0.51          0.63 27134.74
+  15       0.51          0.64 27297.85
+  16       0.51          0.65 27462.82
+  17       0.51          0.66 27632.45
+  18       0.51          0.67 27806.77
+  19       0.51          0.68 27988.12
+  20       0.51          0.69 25514.42", header = T)
+  
+  # You can use plotly to create a 3d surface plot. Use xtabs to turn your data into a suitable matrix
+  library(plotly)
+  plot_ly(z = ~xtabs(z ~ x + y, data = df)) %>% add_surface()
+  
+  ```
+
+  
