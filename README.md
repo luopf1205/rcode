@@ -14,6 +14,24 @@ Update date: 4/30, 2021
 
 
 
+## Rstudio
+
+### set working dictionary to source file location
+
+```R
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+getwd()
+```
+
+### ggplot themset for all plots
+
+```R
+library(ggplot2)
+theme_set(theme_bw())
+```
+
+
+
 ## 1. Plotting
 
 ### plot packages
