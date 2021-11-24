@@ -28,6 +28,19 @@ getwd()
 ```R
 library(ggplot2)
 theme_set(theme_bw())
+
+# 日本語
+theme_set(theme_bw(base_family="HiraKakuProN-W3"))
+theme_set(theme_bw(base_family="HiraKakuProN-W3"))
+# infection by income group
+p1 <- data_income %>% ggplot(aes(x=date,y=new_cases_smoothed_per_million,colour=location)) +geom_line()+
+  labs(title = '感染者数（百万人当たり）',x = '',y='')+
+  scale_color_discrete(name='所得別',labels=c('High income'='高所得国','Upper middle income'='中・高所得国','Lower middle income'='低・中所得国','Low income'='低所得国','World'='世界平均'))
+
+# center title
+ggplot +
+  theme(plot.title = element_text(hjust = 0.5))  
+
 ```
 
 
@@ -172,6 +185,13 @@ p1 + p2
 # 3 plots in first row, 1 plot in second row 
 (p1 | p2 | p3) /
       p4
+
+# tagging plots
+patchwork + plot_annotation(tag_levels = 'A')
+
+# add title
+patchwork + plot_annotation(title='XXX')
+
 ```
 
 ------
