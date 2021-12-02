@@ -915,12 +915,6 @@ as.data.table(pokemon)[,describe(Atk),by=Type.I]
 
 
 
-
-
-
-
-
-
 ## 12. financial data fetch & solution
 
  `quantmod` package
@@ -938,6 +932,36 @@ as.data.table(pokemon)[,describe(Atk),by=Type.I]
 - <https://cran.r-project.org/web/packages/tidyquant/vignettes/TQ00-introduction-to-tidyquant.html>
 - http://delta0726.web.fc2.com/packages/finance/tidyquant.html
 ------
+
+
+
+## get data through API
+
+#### IMF database: `imfr`package
+
+```
+library(imfr)
+
+all_iso2c
+
+current_year()
+
+imf_ids(return_raw = FALSE, times = 400)
+
+imf_codelist(database_id = 'IFS')
+
+
+indicator.exchange.rate <- c('EREER_IX','ENEER_IX')
+indicator.interest.rate <- c('FPOLM_PA','FID_PA','FIDR_PA','FILR_PA')
+
+country.main <- c('CA','CN','FR','DE','IT','JP','UK','US')
+
+ex <- imf_data(database_id = 'IFS',indicator = indicator.exchange.rate,country = c('CN','GB'),freq='M')
+
+interest <- imf_data(database_id = 'IFS',indicator = indicator.interest.rate,country = country.main,freq='M')
+
+ggplot(interest,aes(x=as.yearmon(year_month),y=FPOLM_PA,lty=iso2c))+geom_line()
+```
 
 
 
