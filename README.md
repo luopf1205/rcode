@@ -776,7 +776,7 @@ VAR model, SVAR model
 - Uhlig's (2005) sign restricted VAR model
 - to be finished
 
-### nice plot for impulse response
+### nice plot for irf
 
 ```R
 # load package
@@ -831,6 +831,124 @@ p16 <- VAR1 %>%  impulseResponsePlot(impulse = "rw", response = "rw", n.ahead = 
 
 # combine plots 4 x 4
 gridExtra::grid.arrange(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16)
+```
+
+### plotting irf by basic R
+
+```R
+library(vars)
+data(Canada)
+head(Canada)
+var_fit <- VAR(Canada, p = 1)
+var_irf <- irf(var_fit)
+
+irf1<-data.frame(var_irf$irf$e[,1],var_irf$Lower$e[,1],var_irf$Upper$e[,1])
+
+irf2<-data.frame(var_irf$irf$e[,2],var_irf$Lower$e[,2],var_irf$Upper$e[,2])
+irf3<-data.frame(var_irf$irf$e[,3],var_irf$Lower$e[,3],var_irf$Upper$e[,3])
+irf4<-data.frame(var_irf$irf$e[,4],var_irf$Lower$e[,4],var_irf$Upper$e[,4])
+
+par(mfrow=c(1,4))
+matplot(irf1, type="l", lwd=2, col="red", ylab='',main=expression( sigma[e] %->% e), lty=c(1,2,2))
+abline(h=0,col='black')
+matplot(irf2, type="l", lwd=2, col="red", ylab='',main=expression( sigma[prod] %->% e), lty=c(1,2,2))
+abline(h=0,col='black')
+matplot(irf3, type="l", lwd=2, col="red", ylab='',main=expression( sigma[rw] %->% e), lty=c(1,2,2))
+abline(h=0,col='black')
+matplot(irf4, type="l", lwd=2, col="red", ylab='',main=expression( sigma[U] %->% e), lty=c(1,2,2))
+abline(h=0,col='black')
+```
+
+### extract irf, then plotting
+
+function to extract irf, lower/upper bound
+
+```R
+# -------------------------------------------------------------------------------
+# `extract_varirf()` extracts the impulse reponse vector, along with the upper and 
+# lower confidence interval vectors, created by the `irf()` function in the `vars`
+# package and puts them into a tidy dataframe that allows for easier 
+# impulse-reponse function plotting, particularly with the ggplot2. `extract_varirf()`
+# accepts single or multiple 'varirf' list objects created by `irf()`, provided they 
+# are created from the same dataset and of the same length. For additional details
+# and examples of usage, please consult:
+# mentalbreaks.rbind.io/posts/impulse-reponse-plots-with-vars-and-ggplot2
+# 
+# @anguyen1210
+# -------------------------------------------------------------------------------
+
+extract_varirf <- function(...){
+    
+    varirf_object <- list(...) #list one or more varirf input objects
+    
+    get_vec_length <- function(list_item){nrow(list_item[[1]][[1]])}
+    
+    if (!("varirf" %in% mapply(class, varirf_object))){
+        stop("this function only accepts 'varirf' class objects")
+    }
+    
+    if (length(unique(mapply(class, varirf_object)))!=1){
+        stop("all input items must be 'varirf' class objects")
+    }    
+    if (length(unique(mapply(get_vec_length, varirf_object)))!=1){
+        stop("all irf vectors must have the same length")   
+    }  
+    
+    period <- as.data.frame(0:(nrow(varirf_object[[1]][[1]][[1]])-1)) 
+    names(period) <- "period"
+    
+    for (l in 1:length(varirf_object)){
+        for (i in 1:3){
+            for (j in 1:dim(varirf_object[[l]][[i]][[1]])[2]){
+                for (k in 1:length(varirf_object[[l]][[1]])){
+                    temp_colname <- paste(names(varirf_object[[l]][i]), #vector type (irf, lower, or upper)
+                                          names(varirf_object[[l]][[i]])[k], #impulse name
+                                          colnames(varirf_object[[l]][[i]][[k]])[j], #response name
+                                          sep = "_")
+                    
+                    temp <- as.data.frame(varirf_object[[l]][[i]][[k]][, j]) #extracts the vector
+                    
+                    names(temp) <- temp_colname #add the column name (vectortype_impulse_reponse)
+                    period <- cbind(period, temp) 
+                }
+                
+            }
+        }
+    }
+    names(period) <- tolower(names(period))
+    return(period)
+}
+```
+
+
+
+```R
+## load function
+library(devtools)
+source_url("https://raw.githubusercontent.com/anguyen1210/var-tools/master/R/extract_varirf.R")
+
+## extract irf,lower/upper bound
+single_varirf <- extract_varirf(var_irf)
+head(single_varirf)
+
+## begin plot
+asy_ulv <- multiple_varirf %>% 
+  ggplot(aes(x=period, y=irf_asy_ulv, ymin=lower_asy_ulv, ymax=upper_asy_ulv)) +
+  geom_hline(yintercept = 0, color="red") +
+  geom_ribbon(fill="grey", alpha=.2, color="grey50", linetype="dashed") +
+  geom_line() +
+  theme_light() +
+  ggtitle("Orthogonal impulse response, asylum - unemployment level")+
+  ylab("log(total unemployment)")+
+  xlab("Quarter") +
+  theme(plot.title = element_text(size = 11, hjust=0.5),
+        axis.title.y = element_text(size=11))
+
+#ggsave("figs/asy_ulv.png", asy_ulv, width=6, height=4)
+
+asy_ulv
+# then plot all
+## then combine all plots(using patchwork package)
 ```
 
 
