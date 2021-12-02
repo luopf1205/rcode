@@ -4,17 +4,19 @@ Author: pengfei luo.
 Update date: 4/30, 2021
 ---
 
-[toc]
+
+
+[TOC]
 
 
 
 
 
-[toc]
 
 
 
-## Rstudio
+
+## 1. Rstudio setting
 
 ### set working dictionary to source file location
 
@@ -23,33 +25,15 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 getwd()
 ```
 
-### ggplot themset for all plots
-
-```R
-library(ggplot2)
-theme_set(theme_bw())
-
-# 日本語
-theme_set(theme_bw(base_family="HiraKakuProN-W3"))
-theme_set(theme_bw(base_family="HiraKakuProN-W3"))
-# infection by income group
-p1 <- data_income %>% ggplot(aes(x=date,y=new_cases_smoothed_per_million,colour=location)) +geom_line()+
-  labs(title = '感染者数（百万人当たり）',x = '',y='')+
-  scale_color_discrete(name='所得別',labels=c('High income'='高所得国','Upper middle income'='中・高所得国','Lower middle income'='低・中所得国','Low income'='低所得国','World'='世界平均'))
-
-# center title
-ggplot +
-  theme(plot.title = element_text(hjust = 0.5))  
-
-```
 
 
 
-## 1. Plotting
 
-### plot packages
+## 1. Plotting with ggplot
 
-`cowplot`
+### popular plotting packages
+
+`cowplot` package
 
  - Plot grid for ggplot objects
 
@@ -61,16 +45,12 @@ ggplot +
 
   https://wilkelab.org/cowplot/articles/index.html
 
-
-
-`ggfortify`
+`ggfortify` package
 
 - Extension to ggplot2 to handle some popular packages - R software and data visualization
 - e.g. support plot multiple plots for xts objects
 
-
-
-`ggtheme`
+`ggtheme` package
 
  - 自动添加ggplot主题
 
@@ -82,19 +62,17 @@ ggplot+theme_stata()
 ggplot+theme_bw()
 ```
 
+`esquisse` package
 
-
-`esquisse`
+- add-in with UI
 
  - 免代码ggplot生成器, using ide to obtain ggplot code
 
-
-
 `ggThemAssist`
 
+- add-in with UI
+
 - 界面调ggplot代码, using ide to obtain ggplot code
-
-
 
 `plotly`
 
@@ -105,15 +83,11 @@ ggplot+theme_bw()
    plotly(ggplot)
    ```
 
-
-
 `tygraphs`
 
 - plot mutiple time series
 
  - xts objects
-
-
 
 `corrplot`
 
@@ -134,7 +108,7 @@ corrplot(correlation)
 
 
 
-### combine multiple plots: ggplot objects
+### plots combination: ggplot objects
 
 `ggpubr::ggarrange()`
 
@@ -150,7 +124,7 @@ corrplot(correlation)
 `gridExtra::grid.arrange()`
 
 ``` R
-gridExtra::grid.arrange(p1,p2,p3,p4)
+ gridExtra::grid.arrange(p1,p2,p3,p4)
 ```
 
 
@@ -191,14 +165,13 @@ patchwork + plot_annotation(tag_levels = 'A')
 
 # add title
 patchwork + plot_annotation(title='XXX')
-
 ```
 
 ------
 
 #### reorder facet
 
-- Example 1
+- Example 1: changing facor level
 
 ```R
 # p:ggplot2 object
@@ -230,21 +203,59 @@ p <- goog1 %>% filter(indicator!='volumn' & indicator!='adj') %>%
   facet_grid(~factor(indicator,levels = c('open','high','low','close'))) # reorder facet
 ```
 
-
-
-
-
-### combine multiple plots: basic R
+### plots combination: basic R
 
 - <https://www.statmethods.net/advgraphs/layout.html>
 -   `par()`
 -   `layout()`
 
-### 
-
 ------
 
+###　Japanese language themeset in ggplot（日本語）
 
+- 用途：日本語をgglotに設定する
+
+```R
+library(ggplot2)
+theme_set(theme_bw())
+
+# 日本語
+theme_set(theme_bw(base_family="HiraKakuProN-W3"))
+theme_set(theme_bw(base_family="HiraKakuProN-W3"))
+# infection by income group
+p1 <- data_income %>% ggplot(aes(x=date,y=new_cases_smoothed_per_million,colour=location)) +geom_line()+
+  labs(title = '感染者数（百万人当たり）',x = '',y='')+
+  scale_color_discrete(name='所得別',labels=c('High income'='高所得国','Upper middle income'='中・高所得国','Lower middle income'='低・中所得国','Low income'='低所得国','World'='世界平均'))
+
+# center title
+ggplot +
+  theme(plot.title = element_text(hjust = 0.5)) 
+```
+
+- example
+
+![covid infections](https://i.loli.net/2021/12/02/8kirUj7dSTDCMvI.png)Changing Line Type for specified interval in time series (solid to dotted)
+
+- Usage: 改变同时时间序列在某一时点前后的线的形状,例如: IMF World Economic Outlook, real GDP, 前:实线(solid),表示实现值《现在时点》后:点线(dotted),表示预测值
+
+- https://stackoverflow.com/questions/42072942/changing-line-type-for-specified-interval-in-time-series-solid-to-dotted
+
+- using `subset()`
+
+- ```R
+  data1 <- subset(data, int_year <= 2015)
+  data2 <- subset(data, int_year >= 2015)
+  ggplot(data1, aes(x = year, y = value, color = group)) +
+    geom_point() + 
+    geom_line() + 
+    geom_point(data=data2, aes(x = year, y = value, color = group)) + 
+    geom_line(data=data2, aes(x = year, y = value, color = group), lty=2) + 
+    theme_bw()
+  ```
+
+- Example
+
+  ![enter image description here](https://i.stack.imgur.com/kaZgU.png)
 
 ## 2. tidyverse
 
@@ -262,8 +273,6 @@ p <- goog1 %>% filter(indicator!='volumn' & indicator!='adj') %>%
   country=c('China','Japan','Korea','Hong Kong','Brunei','Combodia','Indonesia','Laos','Malaysia','Myanmar','Philippines','Singapore','Thailand','Vietnam')
   data %>% filter(location %in% country) 
   ```
-
-  
 
 - `summarise()` reduces multiple values down to a single summary.
 
@@ -309,7 +318,6 @@ data sets come in many formats, but R prefers just one.
 # devtools::install_github('rstudio/EDAWR')
 # install.packages("EDAWR")
 library(EDAWR)
-
 
 
 deal with **storms**
@@ -420,10 +428,6 @@ functions in `tidyr`package
 ####  `stringr`
 
  -	处理字符串
-
-<br>
-
-
 
 ### `lubridate`
 
@@ -607,8 +611,6 @@ data_qtrly <- data %>%
 write.csv(data_qtrly, "path")
 
 ```
-
-
 
 - method 2: using lubridate::floor_date()
 
