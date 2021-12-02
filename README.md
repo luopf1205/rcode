@@ -939,7 +939,10 @@ as.data.table(pokemon)[,describe(Atk),by=Type.I]
 
 #### IMF database: `imfr`package
 
-```
+- https://meshry.com/blog/downloading-data-from-the-imf-api-using-r/
+
+```R
+### example 1
 library(imfr)
 
 all_iso2c
@@ -961,6 +964,33 @@ ex <- imf_data(database_id = 'IFS',indicator = indicator.exchange.rate,country =
 interest <- imf_data(database_id = 'IFS',indicator = indicator.interest.rate,country = country.main,freq='M')
 
 ggplot(interest,aes(x=as.yearmon(year_month),y=FPOLM_PA,lty=iso2c))+geom_line()
+
+### example 2
+library(tidyverse)
+library(imfr)
+library(xts)
+
+imf_metadata(database_id = 'IFS', indicator = 'EREER_IX',start = 2001,end = 2001, country = 'CN')
+imf_databases<-imf_ids() 
+View(imf_databases)
+
+bop <- imf_codelist(database_id = 'BOP')
+
+imf_codes(codelist = imf_codelist(database_id = 'BOP'))
+
+
+IFS_INDICATOR_codes<-imf_codes(codelist = "CL_INDICATOR_IFS")
+
+IFS_prices<-imf_data(database_id = "IFS",indicator = c('PCPI_IX','PCPI_PC_CP_A_PT','PCPI_PC_PP_PT','PCPIHA_IX'), country = c('CN','CA','FR','DE','IT','JP','UK','US'), freq = 'M', start = 1990 , end = current_year())
+prices <- IFS_prices %>% select(iso2c,year_month,PCPI_IX)
+colnames(prices) <- c('country','date','consumer prices index')
+prices$country <- as.factor(prices$country)
+prices$date <- as.yearmon(prices$date)
+
+str(prices)
+
+prices %>% ggplot(aes(x=date,y=`consumer prices index`))+geom_line()+facet_wrap(~country,ncol=3)
+
 ```
 
 
