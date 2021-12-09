@@ -16,7 +16,7 @@ Update date: 4/30, 2021
 
 
 
-## 1. Rstudio setting
+## Rstudio setting
 
 ### set working dictionary to source file location
 
@@ -24,6 +24,60 @@ Update date: 4/30, 2021
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 getwd()
 ```
+
+
+
+## packages
+
+### gg-family (extension for ggplot)
+
+`ggfortify`
+
+`ggpubr`:publication ready plots
+
+`ggsci`: SCI journals themes
+
+ `ggthemes`
+
+`ggannnotate`
+
+`ggforce`: accelerating `ggplot2`
+
+`cowplot`
+
+`dygraphs`:The dygraphs package is an R interface to the [dygraphs](http://dygraphs.com/) JavaScript charting library. It provides rich facilities for charting time-series data in R
+
+`corrplot`: correlations plot
+
+
+
+### database
+
+`quantmod`
+
+`quandl`
+
+`OECD`:OECD
+
+`imfr`:IMF
+
+`COVID19`: R interface to COVID-19 Data Hub
+
+
+
+### article writing
+
+`bibliometrix`: comprehensice science mapping analysis
+
+
+
+### models
+
+`broom`: convert statistical objects into tidy tibbles
+
+`bruseR`:broadly useful covenient and efficient R functions
+
+ 
 
 
 
@@ -680,13 +734,22 @@ data %>% group_by(id) %>% mutate(dy=y-lag(y))
 
 
 
-## XTS
+## XTS(need add)
 
-### Get and merge closing data from quantmod
+remove NA values: `na.omit`
 
 
+
+
+
+## database packages
+
+### quantmod package(with XTS)
+
+Get and merge closing data from quantmod
 
 ```R
+# method 1
 library(quantmod)
 e<-new.env()
 tickers<-c("GE","BMW.DE","NOVO-B.CO","1COV.DE")
@@ -696,14 +759,25 @@ getSymbols(tickers,from="2019-01-01",env=e)
 merged_prices <- do.call(merge, lapply(e, Ad))
 merged_prices
 
+## plot multiple timeseries
 library(tidyverse)
 library(ggfortify)
 autoplot(merged_prices,facets = FALSE)
 
 
+# method 2
+symbol <- c('JPY=X','CNY=X','IDR=X','THB=X','MYR=X','PHP=X')
+start_date <- as.Date('2000-01-01')
+end_date <- as.Date('2021-11-30')
+data.env <- new.env()
+getSymbols(Symbols = symbol,from=start_date,to=end_date,
+           env = data.env,periodicity='daily')
+EX_Adj_Data <- do.call(merge, eapply(data.env, Ad))
 ```
 
-### Divide each row of an XTS or ZOO time series object by a fixed row (a value on a Date)
+
+
+### 複数の指標を指数化（同じ日付をベース＝100にする）：Divide each row of an XTS or ZOO time series object by a fixed row (a value on a Date)
 
 ```R
 
@@ -712,6 +786,18 @@ data <- merged_prices/drop(coredata(merged_prices['2020-01-06']))*100
 
 autoplot(data)
 ```
+
+### OECD data
+
+- https://rpubs.com/keisato/OECD
+
+### IMF data
+
+
+
+
+
+
 
 
 
@@ -775,6 +861,11 @@ VAR model, SVAR model
 
 - Uhlig's (2005) sign restricted VAR model
 - to be finished
+
+`pacman` package
+
+- panel VAR model
+- Example:  https://rpubs.com/lijunjie/pvar
 
 ### nice plot for irf
 
