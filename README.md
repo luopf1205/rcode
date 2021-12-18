@@ -51,7 +51,7 @@ getwd()
 
 
 
-### database
+### databases to get data
 
 `quantmod`
 
@@ -166,12 +166,13 @@ corrplot(correlation)
 
 `ggpubr::ggarrange()`
 
-- ```R
-  ggpubr::ggarrange(p1,p2,p3,p4
-                  ncol=2,nrow=2,
-                  labels="",label.x= , label.y= ,
-                  align=c("none", "h", "v", "hv"),
-                  common.legend=T)
+```R
+ggpubr::ggarrange(p1,p2,p3,p4
+                ncol=2,nrow=2,
+                labels="",label.x= , label.y= ,
+                align=c("none", "h", "v", "hv"),
+                common.legend=T)
+```
 
 
 
@@ -260,8 +261,8 @@ p <- goog1 %>% filter(indicator!='volumn' & indicator!='adj') %>%
 ### plots combination: basic R
 
 - <https://www.statmethods.net/advgraphs/layout.html>
--   `par()`
--   `layout()`
+- `par()`
+- `layout()`
 
 ------
 
@@ -483,21 +484,46 @@ functions in `tidyr`package
 
  -	处理字符串
 
-### `lubridate`
+#### `lubridate`
 
 处理时间
 
-### `reshape2`
+#### `reshape2`
 
 out of date, replaced by `tidyr` package
 
-### `stringr`
+#### `stringr`
 
 处理字符串
 
 
 
 ------
+
+### some functions using tidyverse
+
+#### convert all factor columns to character in a data.frame without affecting non-factor columns
+
+https://stackoverflow.com/questions/47633241/convert-all-factor-columns-to-character-in-a-data-frame-without-affecting-non-fa/47633303
+
+```R
+# library(tidyverse)
+df <- data.frame(a = 1:5, b = factor(c("a", "b", "c", "d", "e")), c = factor(c("f", "g", "h", "i", "j")))
+df %>% glimpse() 
+
+# Observations: 5
+# Variables: 3
+# $ a <int> 1, 2, 3, 4, 5
+# $ b <fctr> a, b, c, d, e
+# $ c <fctr> f, g, h, i, j
+
+df %>% mutate_if(is.factor, as.character) %>% glimpse()
+# Observations: 5
+# Variables: 3
+# $ a <int> 1, 2, 3, 4, 5
+# $ b <chr> "a", "b", "c", "d", "e"
+# $ c <chr> "f", "g", "h", "i", "j"
+```
 
 
 
@@ -518,8 +544,6 @@ another object for tabular data
 ```R
 tbl_data[, -(1:2)] <- sweep(tbl_data[, -(1:2)], 1, tbl_data[, 2], "/")
 ```
-
-
 
 ####  Join/merge multiple data.frames
 
@@ -563,7 +587,7 @@ tbl_data[, -(1:2)] <- sweep(tbl_data[, -(1:2)], 1, tbl_data[, 2], "/")
 
 ## 5. pipe operator (migrittr package)
 
-### %>%
+- %>%
 
 forward pipe operator
 
@@ -576,7 +600,7 @@ iris %>% lm(Sepal.Length ~ Sepal.Width)
 iris %>% lm(Sepal.Length ~ Sepal.Width, data=.)
 ```
 
-### %$%
+- %$%
 
 exposition pipe-operator
 
@@ -586,9 +610,7 @@ exposition pipe-operator
 iris %$% lm(Sepal.Length ~ Sepal.Width)
 ```
 
-
-
-### %T>% 
+- %T>%
 
 tee operarator
 
@@ -610,7 +632,7 @@ test %T>%
      colSums()
 ```
 
-### %<>%
+- %<>%
 
 compound assignment pipe-operator
 
@@ -635,8 +657,6 @@ iris %<>%  filter(Species == "virginica") %>% arrange(Sepal.Length)
 - https://rstudio-pubs-static.s3.amazonaws.com/404513_6cb313f3258b4c98a5c5948e93ad6c20.html#fn1
 
 `xts` package
-
-
 
 `quantmod`  package
 
@@ -775,15 +795,10 @@ getSymbols(Symbols = symbol,from=start_date,to=end_date,
 EX_Adj_Data <- do.call(merge, eapply(data.env, Ad))
 ```
 
-
-
 ### 複数の指標を指数化（同じ日付をベース＝100にする）：Divide each row of an XTS or ZOO time series object by a fixed row (a value on a Date)
 
 ```R
-
-
 data <- merged_prices/drop(coredata(merged_prices['2020-01-06']))*100 
-
 autoplot(data)
 ```
 
@@ -792,12 +807,6 @@ autoplot(data)
 - https://rpubs.com/keisato/OECD
 
 ### IMF data
-
-
-
-
-
-
 
 
 
@@ -810,10 +819,6 @@ autoplot(data)
 `forecast` package
 
 - ??? to be finished
-
-
-
-<br>
 
 
 
@@ -1269,8 +1274,6 @@ asy_ulv
 
 
 
-------
-
 ## 10. GARCH model
 
 ### `rugarch`
@@ -1286,12 +1289,6 @@ asy_ulv
 a tidymodel framework for garch models package (`rugarch` and `rmgarch`)
 
 https://albertoalmuinha.github.io/garchmodels/
-
-------
-
-
-
-
 
 
 
@@ -1344,8 +1341,6 @@ psych::describe(pokemon[,3:9])
 as.data.table(pokemon)[,describe(Atk),by=Type.I]
 
 ```
-
-<br>
 
 
 
@@ -1429,9 +1424,9 @@ prices %>% ggplot(aes(x=date,y=`consumer prices index`))+geom_line()+facet_wrap(
 
 
 
-## 13. output model results 模型结果输出
+## 13. model results output 模型结果输出
 
-### `stargazer` package
+#### `stargazer` package
 
 统计结果输出, like xreg2 in Stata, 内置格式e.g. AER
 
@@ -1456,11 +1451,11 @@ stargazar(fit1,fit2,fit3,fit4,
           )
 ```
 
-### `apaTables` package
+#### `apaTables` package
 
 -  ???直接一键输出APA格式的表格到word文件
 
-### `texreg:screenreg()` function
+#### `texreg:screenreg()` function
 
 - show multiple model results in screen for comparison
 
@@ -1472,7 +1467,7 @@ screenreg(list(twoway_effects, twoway_effects_hac),
          )
 ```
 
-### `broom`
+#### `broom`
 
 The broom package takes the messy output of built-in functions in R, such as `lm`, `nls`, or `t.test`, and turns them into tidy tibbles.
 
@@ -1485,7 +1480,7 @@ The broom package takes the messy output of built-in functions in R, such as `lm
 
 ## 14. panel regression model
 
-### `plm`
+#### `plm`
 
 panel model regression
 
@@ -1503,7 +1498,7 @@ Guidance
 
    https://www.ucl.ac.uk/~uctqiax/PUBLG100/2016/week8/seminar8.html#
 
-### using pipe operator for `plm()`/`lm()`
+#### using pipe operator for `plm()`/`lm()`
 
 not %>%, but %$%, 将上一个结果准确传入下一个函数的data参数
 
@@ -1514,21 +1509,17 @@ data %$% lm()
 
 
 
-------
-
-
-
-## 15. How to create dummy variables
+## 15. dummy variables
 
 - https://www.marsja.se/create-dummy-variables-in-r/#:~:text=A%20dummy%20variable%20is%20a,%2Fyes%20or%20off%2Fon.
 
-### one line code to generate time dummy
+#### one line code to generate time dummy
 
 ```r
 data$dummy <- as.numeric(data$date >= "2018-01-01")
 ```
 
-### `ifelse()`
+#### `ifelse()`
 
 - basic R functions
 
@@ -1537,7 +1528,7 @@ dataf$Disc_A <- ifelse(dataf$discipline == 'A', 1, 0)
 dataf$Disc_B <- ifelse(dataf$discipline == 'B', 1, 0)
 ```
 
-### `fastDummies()`
+#### `fastDummies()`
 
 - package to create dummy variables
 
@@ -1564,6 +1555,8 @@ dataf.2 <- dummy_cols(dataf,
 ```
 
 ***
+
+
 
 
 
