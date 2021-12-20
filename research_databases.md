@@ -44,11 +44,16 @@ Oxford Covid-19 government response tracker
 
 ### policy uncertainty
 
-EPU index
+EPU index, monthly
 
-WUI index
+- country/global level data
 
+WUI index, quarterly
 
+- World Uncertainty Index
+- World Trade Uncertainty index
+
+- country/global level
 
 ### exchange rate regime
 
