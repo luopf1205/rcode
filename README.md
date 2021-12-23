@@ -83,7 +83,7 @@ getwd()
 
 
 
-## 1. Plotting with ggplot
+## 1. Plotting
 
 ### popular plotting packages
 
@@ -159,6 +159,20 @@ correlation <- cor(
 # plot correlation
 corrplot(correlation)
 ```
+
+`xtsExtra`
+
+- `plot.xts()` for **xts** object
+
+### multiple plots
+
+- `matplot()`: base R
+
+- ggplot
+- for multiple columns **xts** object
+  - load `ggfortify` package, then `autoplot()`
+  - `plot.zoo()`
+  - `ggExtra::plot.xts()`
 
 
 
