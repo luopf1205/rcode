@@ -1323,6 +1323,10 @@ p16 <- VAR1 %>%  impulseResponsePlot(impulse = "rw", response = "rw", n.ahead = 
 gridExtra::grid.arrange(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16)
 ```
 
+![plot_zoom_png](https://s2.loli.net/2021/12/28/29lidyPgc5rNQq6.png)
+
+
+
 ### plotting irf by basic R
 
 ```R
