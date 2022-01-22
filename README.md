@@ -121,6 +121,16 @@ ggplot+theme_stata()
 ggplot+theme_bw()
 ```
 
+`ggthemr` package
+
+- 自动添加ggplot主题
+
+https://github.com/Mikata-Project/ggthemr
+
+```R
+
+```
+
 `esquisse` package
 
 - add-in with UI
