@@ -1137,17 +1137,15 @@ https://rstudio-pubs-static.s3.amazonaws.com/270271_9fbb9b0f8f0c41e6b7e06b0dc2b1
 myIRF.c <- irf(mySVAR, n.ahead = 12, ci = .9, cumulative = TRUE)
 
 # plot all IRF
-par(mfrow=c(2,2), cex=.6, mar=c(4,4,2,1))
+
 source("C:/Users/rmerrima/Dropbox/Spring 2017/ECO 5316 - Time Series Econometrics/Homework 6/plotIRF.R")
+par(mar=c(2,2,1,1),mfcol=c(4,4),cex=0.5)
 plotIRF(myIRF.c, lwd=2.5, ask=FALSE)
 ```
 
 - function code
 
 ```R
-# Sligthly modified version of plot.irf function from vars package:
-# https://cran.r-project.org/web/packages/vars/
-
 plotIRF <-
   function (x, vnames = NULL, snames = NULL, vlabels = NULL, slabels = NULL,
             main = NULL, sub = NULL, lty = NULL, lwd = NULL, col = NULL, ylim = NULL,
@@ -1242,16 +1240,16 @@ plotIRF <-
     ## Plot function for irf per impulse and response
     ##
     plot.single <- function(x, iname, rname, ylabel, slabel,...) {
-      x$text1 <- paste(x$text1, "from", slabel, sep = " ")
+      x$text1 <- paste(slabel,'->', ylabel)
       ifelse(is.null(main), main <- x$text1, main <- main)
-      ifelse(is.null(sub), sub <- x$text2, sub <- sub)
+      ifelse(is.null(sub), sub <- '', sub <- '')
       xy <- xy.coords(x$impulses[, iname])
       ifelse(is.null(xlab), xlabel <- "", xlabel <- xlab)
       ifelse(is.null(ylim), ylim <- x$range, ylim <- ylim)
       plot(xy, type = "l", ylim = ylim, 
            col = col[1], lty = lty[1], 
            lwd = lwd[1], axes = FALSE, 
-           ylab = paste(ylabel), xlab = paste(xlab), ...)
+           ylab = '', xlab = '', ...)
       title(main = main, sub = sub, ...)
       axis(1, at = xy$x, labels = c(0:(length(xy$x) - 1)))
       axis(2, ...)
@@ -1272,6 +1270,7 @@ plotIRF <-
       }
     }
   }
+
 ```
 
 
