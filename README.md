@@ -1141,6 +1141,10 @@ myIRF.c <- irf(mySVAR, n.ahead = 12, ci = .9, cumulative = TRUE)
 source("C:/Users/rmerrima/Dropbox/Spring 2017/ECO 5316 - Time Series Econometrics/Homework 6/plotIRF.R")
 par(mar=c(2,2,1,1),mfcol=c(4,4),cex=0.5)
 plotIRF(myIRF.c, lwd=2.5, ask=FALSE)
+
+
+### adjust 
+plotIRF(result_irf,lty = c(1,1,2,2),lwd = c(2,1,1,1),col=c(1,2,4,4))
 ```
 
 - function code
