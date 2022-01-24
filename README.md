@@ -293,6 +293,18 @@ p <- goog1 %>% filter(indicator!='volumn' & indicator!='adj') %>%
 - `par()`
 - `layout()`
 
+Plot device set
+
+```R
+dev.new(width=7, height=5,units='cm')
+
+options(device = "quartz")
+
+plot(1:10,text_cex=2)
+```
+
+
+
 ------
 
 ###　Japanese language themeset in ggplot（日本語）
