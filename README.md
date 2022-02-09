@@ -730,6 +730,7 @@ write.csv(data_qtrly, "path")
 - method 2: using lubridate::floor_date()
 
 ```R
+### example 1: time series 
 library(dplyr)
 library(lubridate)
 # data include daily date and value
@@ -742,6 +743,12 @@ df %>%
 	summarise_all(mean)
 # in lubridate package: month(),quarter(),year(),....
 
+### example 2: panel data
+# x is a panel data (country, day), convert to monthly sum or mean
+x$month <- floor_date(x$date,'month')
+x$administrative_area_level_1 <- as.factor(x$administrative_area_level_1)
+y <- x %>% group_by(administrative_area_level_1,month) %>% 
+  summarise(across(c(confirmed,people_fully_vaccinated),sum))
 ```
 
 
