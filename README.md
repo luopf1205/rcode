@@ -846,9 +846,51 @@ EX_Adj_Data <- do.call(merge, eapply(data.env, Ad))
 ### 複数の指標を指数化（同じ日付をベース＝100にする）：Divide each row of an XTS or ZOO time series object by a fixed row (a value on a Date)
 
 ```R
+<<<<<<< Updated upstream
+# wrong method
 data <- merged_prices/drop(coredata(merged_prices['2020-01-06']))*100 
 autoplot(data)
+
+# method available
+
+=======
+＃method wrong
+
+data <- merged_prices/drop(coredata(merged_prices['2020-01-06']))*100 
+autoplot(data)
+
+
+# method available: dataframe and mapply()
+date=seq.Date(as.Date('2000-01-01'),by='day',length.out = 5)
+a=1:5
+b=11:15
+c=21:25
+>>>>>>> Stashed changes
+dat=data.frame(date,a,b,c)
+dat
+
+dat1=data.frame(mapply('/', dat[,-1],dat[2,-1]))
+dat1
+dat2 <- cbind(dat$date,dat1*100)
+dat2
+
+dat.xts <- xts(dat2[,-1],order.by = dat2$`dat$date`)
+library(tidyverse)
+library(ggfortify)
+autoplot(dat.xts)
+<<<<<<< Updated upstream
+=======
+
+
+
+>>>>>>> Stashed changes
 ```
+
+
+
+
+
+
 
 ### OECD data
 
