@@ -8,14 +8,6 @@ Update date: 4/30, 2021
 
 [TOC]
 
-
-
-
-
-
-
-
-
 ## Rstudio setting
 
 ### set working dictionary to source file location
@@ -23,6 +15,15 @@ Update date: 4/30, 2021
 ```R
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 getwd()
+```
+
+### set locate language from JAPANESE to ENGLISH
+
+```R
+## show all R local settings
+Sys.getlocale()
+## set all R local settings to English
+Sys.setlocale("LC_ALL","English")
 ```
 
 
