@@ -17,13 +17,19 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 getwd()
 ```
 
-### set locate language from JAPANESE to ENGLISH
+### sset message language to English (recommended!!!)
+
+locate language from JAPANESE to ENGLISH
 
 ```R
+## set message language to English (recommended!!!!!!)
+Sys.setenv(LANGUAGE="en")
+
 ## show all R local settings
 Sys.getlocale()
 ## set all R local settings to English
 Sys.setlocale("LC_ALL","English")
+
 ```
 
 
