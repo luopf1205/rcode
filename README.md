@@ -1194,6 +1194,12 @@ VAR model, SVAR model
 - panel VAR model
 - Example:  https://rpubs.com/lijunjie/pvar
 
+### IRF from exogenous shock to endogenous variables
+
+`MTS` package `VARirf` function: generate IRFs for exogenous variables
+
+
+
 ### varIRF function
 
 https://rstudio-pubs-static.s3.amazonaws.com/270271_9fbb9b0f8f0c41e6b7e06b0dc2b13b62.html
@@ -1405,6 +1411,78 @@ gridExtra::grid.arrange(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16)
 ```
 
 ![plot_zoom_png](https://s2.loli.net/2021/12/28/29lidyPgc5rNQq6.png)
+
+```R
+## ResearchGroupTools::plotIrf function
+
+plotIrf <- function(irf, name = NULL, ylab = NULL, alpha = 0.3, n.ahead = NULL, filename = NULL, width = 10, height = 6, ...) {
+  if (!irf$boot) {
+    stop("Plot requires confidence intervals (call irf with argument boot).")
+  }
+
+  if (is.null(name)) {
+    if (length(irf$impulse) == 1) {
+      name <- irf$impulse
+    } else {
+      stop("More than one impulse stored, but no selection made via argument 'name'.")
+    }
+  } else if (!(name %in% irf$impulse)) {
+    stop("Argument 'name' is not a valid impulse as it is not stored in 'irf' object.")
+  }
+
+  # to surpress warnings
+  x <- NULL
+  impulse <- NULL
+  upper <- NULL
+  lower <- NULL
+
+  df <- data.frame(x = 1:length(irf$irf[[name]]),
+                   impulse = irf$irf[[name]],
+                   upper = irf$Upper[[name]],
+                   lower = irf$Lower[[name]])
+  colnames(df) <- c("x", "impulse", "upper", "lower")
+
+  if (!is.null(n.ahead)) {
+    df <- df[1:n.ahead, ]
+  }
+
+  p <- ggplot2::ggplot(df, ggplot2::aes(x = x)) +
+    ggplot2::geom_line(ggplot2::aes(y = impulse)) +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = 0)) +
+    ggplot2::geom_ribbon(ggplot2::aes(ymin = lower, ymax = upper), alpha = alpha) +
+    ggplot2::theme_bw() +
+    ggplot2::xlab("")
+
+  if (is.null(ylab)) {
+    p <- p + ggplot2::ylab(name)
+  } else {
+    p <- p + ggplot2::ylab(ylab)
+  }
+
+  if (!is.null(filename)) {
+    ggsave(filename, p, ...)
+  }
+
+  return(p)
+}
+
+## ## ResearchGroupTools::impulseResponsePlot function
+impulseResponsePlot <- function(var, impulse, response, n.ahead = 10, filename = NULL, width = 10, height = 6, ...) {
+  if (class(var) != "varest" && class(var) != "svarest") {
+    stop("Argument 'var' is not of type varest or svarest.")
+  }
+
+  if (!is.character(impulse) || length(impulse) > 1) {
+    stop("Argument 'impulse' must be a single identifier as a string.")
+  }
+  if (!is.character(response) || length(response) > 1) {
+    stop("Argument 'response' must be a single identifier as a string.")
+  }
+
+  irf <- vars::irf(var, impulse = impulse, response = response, boot = TRUE, n.ahead = n.ahead)
+  plotIrf(irf, filename = filename, width = width, height = height, ...)
+}
+```
 
 
 
