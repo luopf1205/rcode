@@ -941,7 +941,31 @@ https://elsur.jpn.org/mt/2020/02/002830.html
 - `ur.kpss(y, type, lags, selectlags)` KPSS
 - `ur.pp(y, type, lags, selectlags)` PP test
 
-explanations function for `ur.df`
+
+
+### unit root test for all columns in dataframe
+
+```R
+# data
+dat <- Canada
+
+# dat is data.frame
+MY_LIST=apply(dat,2,function(x){
+  return(
+    list(
+      ur.df(x, type = "none",selectlags = "BIC"),
+      ur.pp(x, type = "Z-tau",model = 'constant',lags='short'),
+      ur.kpss(x, type = "tau",lags = 'short')
+    )
+  )
+})
+```
+
+
+
+
+
+### explanations function for `ur.df`
 
 - https://www.r-bloggers.com/2021/12/easy-interpretations-of-adf-test-in-r/
 
