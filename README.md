@@ -2005,15 +2005,23 @@ import "D:\GitHub\globalrisk\IJFE\reviewer comment, 2022-3-29\SVAR EVIEWS\data.x
 # VAR model
 var01.ls 1 2 d(lcgepu) d(lepu) d(interest) d(lneer) d(lstock) d(lip) d(lcpi) d(ltrade) d(unemp)
 
+
+
 # lag length
 
 var01.laglen(5)
+
+
+# SVAR
+var03.ls 1 2 d(lvix) d(liv) d(interest) d(lneer) d(lstock) d(lip) d(lcpi) d(ltrade) d(unemp)
+var03.laglen(4)
+var03.svar(s=smat2)
 
 # impulse response function
 var01.impulse(imp=struct, se=a) @imp 1 2 3 4 5 6 7 8 9
 
 # accumulated IRF and save IRF & SE magnitudes(matbys: ordering by shock variable; matbyr: by response variables)
-var01.impulse(13, a, imp=struct, se=a, matbys=var1_cirf) @imp 1 2
+var03.impulse(13, a, imp=struct, se=a, matbys=var3_cirf) @imp 1
 
 ```
 
