@@ -312,6 +312,10 @@ options(device = "quartz")
 plot(1:10,text_cex=2)
 ```
 
+### plot multiple time series data: indexation by base date
+
+https://blog.revolutionanalytics.com/2014/01/quantitative-finance-applications-in-r-plotting-xts-time-series.html
+
 
 
 ------
@@ -2098,3 +2102,15 @@ var03.impulse(13, a, imp=struct, se=a, matbys=var3_cirf) @imp 1
 > var1.impulse(10,m) gdp @ m1 @ cpi gdp  m1
 >
 > displays the impulse response of GDP to a  one standard deviation shock in M1 using a different ordering. 
+
+
+
+# endnote
+
+### add label to multiple selected reference: 
+
+select multiple papers->library->change/move/copy fields
+
+### remove duplicated reference
+
+all reference->library-> find duplicates
