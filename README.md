@@ -1230,7 +1230,7 @@ VAR model, SVAR model
 
 
 
-### perfect way to plot multiple IRF plots in R!!!!!
+### PERFECT WAY TO PLOT MULTIPLE IRFS !!!!
 
 ```R
 {r}
@@ -1238,8 +1238,6 @@ rm(list = ls())
 library(tidyverse)
 library(magrittr)
 library(vars)
-data("Canada")
-
 
 extract_varirf <- function(...){
     
@@ -1285,6 +1283,7 @@ extract_varirf <- function(...){
 
 ##BEGIN!!!
 #VAR
+data("Canada")
 varmodel <- VAR(y = Canada,type = 'const',lag.max = 4,ic='AIC' )
 ## full irf
 varirf <- irf(varmodel,n.ahead = 12)
@@ -1307,7 +1306,7 @@ ggplot(data = cleanirf)+
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-
+<img src="C:\Users\luope\Desktop\00003a (1).png" alt="00003a (1)" style="zoom:150%;" />
 
 
 
