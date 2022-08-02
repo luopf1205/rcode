@@ -1230,6 +1230,91 @@ VAR model, SVAR model
 
 
 
+### perfect way to plot multiple IRF plots in R!!!!!
+
+```R
+{r}
+rm(list = ls())
+library(tidyverse)
+library(magrittr)
+library(vars)
+data("Canada")
+
+
+extract_varirf <- function(...){
+    
+    varirf_object <- list(...) #list one or more varirf input objects
+    
+    get_vec_length <- function(list_item){nrow(list_item[[1]][[1]])}
+    
+    if (!("varirf" %in% mapply(class, varirf_object))){
+        stop("this function only accepts 'varirf' class objects")
+    }
+    
+    if (length(unique(mapply(class, varirf_object)))!=1){
+        stop("all input items must be 'varirf' class objects")
+    }    
+    if (length(unique(mapply(get_vec_length, varirf_object)))!=1){
+        stop("all irf vectors must have the same length")   
+    }  
+    
+    period <- as.data.frame(0:(nrow(varirf_object[[1]][[1]][[1]])-1)) 
+    names(period) <- "period"
+    
+    for (l in 1:length(varirf_object)){
+        for (i in 1:3){
+            for (j in 1:dim(varirf_object[[l]][[i]][[1]])[2]){
+                for (k in 1:length(varirf_object[[l]][[1]])){
+                    temp_colname <- paste(names(varirf_object[[l]][i]), #vector type (irf, lower, or upper)
+                                          names(varirf_object[[l]][[i]])[k], #impulse name
+                                          colnames(varirf_object[[l]][[i]][[k]])[j], #response name
+                                          sep = "_")
+                    
+                    temp <- as.data.frame(varirf_object[[l]][[i]][[k]][, j]) #extracts the vector
+                    
+                    names(temp) <- temp_colname #add the column name (vectortype_impulse_reponse)
+                    period <- cbind(period, temp) 
+                }
+                
+            }
+        }
+    }
+    names(period) <- tolower(names(period))
+    return(period)
+}
+
+##BEGIN!!!
+#VAR
+varmodel <- VAR(y = Canada,type = 'const',lag.max = 4,ic='AIC' )
+## full irf
+varirf <- irf(varmodel,n.ahead = 12)
+
+# tidy irf object
+irfdata <- extract_varirf(varirf)
+cleanirf <- irfdata %>% pivot_longer(!period,names_to = 'index',values_to = 'value') %>% separate(col = 'index',into = c('list','impulse','response')) %>% pivot_wider(names_from = list,values_from = value)
+
+#or
+cleanirf <- iextract_varirf(varirf) %>% pivot_longer(!period,names_to = 'index',values_to = 'value') %>% separate(col = 'index',into = c('list','impulse','response')) %>% pivot_wider(names_from = list,values_from = value)
+
+## plot by clean data
+theme_set(theme_bw())
+ggplot(data = cleanirf)+
+  geom_line(aes(x=period,y=irf))+
+  geom_ribbon(aes(x=period,ymin=lower,ymax=upper),fill='orange',alpha=0.3)+
+  geom_hline(yintercept=0,linetype='dotted')+
+  facet_grid(vars(impulse),vars(response))+
+  labs(title =  'shocks',x='period',y='responses')+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+
+
+
+
+
+
+
+
 ### varIRF function
 
 https://rstudio-pubs-static.s3.amazonaws.com/270271_9fbb9b0f8f0c41e6b7e06b0dc2b13b62.html
