@@ -1293,10 +1293,22 @@ irfdata <- extract_varirf(varirf)
 cleanirf <- irfdata %>% pivot_longer(!period,names_to = 'index',values_to = 'value') %>% separate(col = 'index',into = c('list','impulse','response')) %>% pivot_wider(names_from = list,values_from = value)
 
 #or
-cleanirf <- iextract_varirf(varirf) %>% pivot_longer(!period,names_to = 'index',values_to = 'value') %>% separate(col = 'index',into = c('list','impulse','response')) %>% pivot_wider(names_from = list,values_from = value)
+cleanirf <- extract_varirf(varirf) %>% pivot_longer(!period,names_to = 'index',values_to = 'value') %>% separate(col = 'index',into = c('list','impulse','response')) %>% pivot_wider(names_from = list,values_from = value)
 
 ## plot by clean data
 theme_set(theme_bw())
+ggplot(data = cleanirf)+
+  geom_line(aes(x=period,y=irf))+
+  geom_ribbon(aes(x=period,ymin=lower,ymax=upper),fill='orange',alpha=0.3)+
+  geom_hline(yintercept=0,linetype='dotted')+
+  facet_grid(vars(impulse),vars(response))+
+  labs(title =  'shocks',x='period',y='responses')+
+  theme(plot.title = element_text(hjust = 0.5))
+
+## reorder impulse and response in factors to show the plots by variable ordering
+cleanirf$impulse <- factor(cleanirf$impulse,levels = c('prod','e','u','rw'))
+cleanirf$response <- factor(cleanirf$response,levels = c('prod','e','u','rw'))
+
 ggplot(data = cleanirf)+
   geom_line(aes(x=period,y=irf))+
   geom_ribbon(aes(x=period,ymin=lower,ymax=upper),fill='orange',alpha=0.3)+
