@@ -2210,3 +2210,40 @@ select multiple papers->library->change/move/copy fields
 ### remove duplicated reference
 
 all reference->library-> find duplicates
+
+
+
+# Excel
+
+## Aggregate the specific data: 日次→月次平均值
+
+- Usage
+
+  - Take the data of specific date, ex. Take the monthly average of time series in table 
+
+- Code: 
+
+  - Assuming you have the months in column D enter this formula in E2 and copy till last month
+
+  - ```
+    =AVERAGEIFS($B$1:$B$62,$A$1:$A$62,">="&D2,$A$1:$A$62,"<="&EOMONTH(D2,0))
+    ```
+
+
+## 两列合成一列：整理EVIEWS回归结果
+
+https://blog.csdn.net/kawaqiqi/article/details/107319378
+
+公式法：
+设数据在AB两列，B列插入A列(任选一公式)：
+C1=INDEX(IF(MOD(ROW(),2),A:A,B:B),INT((ROW()+1)/2))
+C1=INDIRECT(IF(MOD(ROW(),2),"A","B")&INT((ROW()+1)/2))
+C1=OFFSET($A$1,INT((ROW(1:1)-1)/2),MOD(ROW(1:1)-1,2))***\*&""\****
+下拉复制公式，最后复制C列，选择性粘贴-数值。INT可以换成FIXED。
+
+注：(1) &""的作用是消去向下填充时多余的0值，但这样会把结果变成字符型。
+
+  (2) offset这个公式在WPS中无法使用。
+
+
+
