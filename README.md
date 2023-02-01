@@ -1730,7 +1730,36 @@ asy_ulv
 ## then combine all plots(using patchwork package)
 ```
 
+### plot tvp-var impulse response in 3d surface
 
+```R
+# Set the number of years and months
+years <- c(1:5)
+months <- c(1:12)
+
+# Create a matrix to store the data
+df <- matrix(nrow = length(years)*length(months), ncol = 3)
+
+# Loop through the years and months, creating random data for each
+rowIndex <- 1
+for (y in years) {
+  for (m in months) {
+    df[rowIndex, ] <- c(y, m, runif(1))
+    rowIndex <- rowIndex + 1
+  }
+}
+z <- matrix(data = df[,3],nrow = 5,ncol = 12)
+
+x <- 1:12
+y <- 1:5
+z <- t(z)
+
+
+# Plot the 3D surface plot
+library(rgl)
+plot <- surface3d(x, y, z, col="blue", alpha=0.5)
+
+```
 
 ## 10. GARCH model
 

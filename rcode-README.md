@@ -38,6 +38,9 @@ lpf
 ``` r
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 getwd()
+
+# or
+setwd(dirname(getwd()))
 ```
 
 ## 1.2 packages
