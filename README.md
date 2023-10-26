@@ -906,9 +906,21 @@ autoplot(normalized_basemonth,facets = F)
 
 specific day 2020-01-01=100
 
+![](https://github.com/luopf1205/rcode/blob/main/image-20231026154534032.png?raw=true)age-20231026154534032.png?raw=true
+
+[]: https://github.com/luopf1205/rcode/blob/main/image-20231026154534032.png?raw=true
+
+
+
 ![image-20231026154625299](D:\GitHub\rcode\image-20231026154625299.png)
 
 specific month 2020-01 average=100
+
+
+
+![](https://github.com/luopf1205/rcode/blob/main/image-20231026154534032.png?raw=true)
+
+https://github.com/luopf1205/rcode/blob/main/image-20231026154534032.png?raw=true
 
 ![image-20231026154534032](D:\GitHub\rcode\image-20231026154534032.png)
 
