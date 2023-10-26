@@ -343,7 +343,7 @@ ggplot +
 
 - example
 
-![covid infections](https://i.loli.net/2021/12/02/8kirUj7dSTDCMvI.png)Changing Line Type for specified interval in time series (solid to dotted)
+![covid infections](D:\GitHub\rcode\8kirUj7dSTDCMvI.png)Changing Line Type for specified interval in time series (solid to dotted)
 
 - Usage: 改变同时时间序列在某一时点前后的线的形状,例如: IMF World Economic Outlook, real GDP, 前:实线(solid),表示实现值《现在时点》后:点线(dotted),表示预测值
 
@@ -364,7 +364,7 @@ ggplot +
 
 - Example
 
-  ![enter image description here](https://i.stack.imgur.com/kaZgU.png)
+  ![enter image description here](D:\GitHub\rcode\kaZgU.png)
 
 ## 2. tidyverse
 
@@ -906,11 +906,11 @@ autoplot(normalized_basemonth,facets = F)
 
 specific day 2020-01-01=100
 
-![image-20231026154625299](C:\Users\luope\AppData\Roaming\Typora\typora-user-images\image-20231026154625299.png)
+![image-20231026154625299](D:\GitHub\rcode\image-20231026154625299.png)
 
 specific month 2020-01 average=100
 
-![image-20231026154534032](C:\Users\luope\AppData\Roaming\Typora\typora-user-images\image-20231026154534032.png)
+![image-20231026154534032](D:\GitHub\rcode\image-20231026154534032.png)
 
 ### OECD data
 
@@ -1543,7 +1543,7 @@ p16 <- VAR1 %>%  impulseResponsePlot(impulse = "rw", response = "rw", n.ahead = 
 gridExtra::grid.arrange(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16)
 ```
 
-![plot_zoom_png](https://s2.loli.net/2021/12/28/29lidyPgc5rNQq6.png)
+![plot_zoom_png](D:\GitHub\rcode\29lidyPgc5rNQq6.png)
 
 ```R
 ## ResearchGroupTools::plotIrf function
