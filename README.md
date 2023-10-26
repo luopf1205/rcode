@@ -904,11 +904,13 @@ autoplot(normalized_basemonth,facets = F)
 
 ```
 
+specific day 2020-01-01=100
 
+![image-20231026154625299](C:\Users\luope\AppData\Roaming\Typora\typora-user-images\image-20231026154625299.png)
 
+specific month 2020-01 average=100
 
-
-
+![image-20231026154534032](C:\Users\luope\AppData\Roaming\Typora\typora-user-images\image-20231026154534032.png)
 
 ### OECD data
 
