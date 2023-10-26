@@ -856,47 +856,52 @@ getSymbols(Symbols = symbol,from=start_date,to=end_date,
 EX_Adj_Data <- do.call(merge, eapply(data.env, Ad))
 ```
 
-### 複数の指標を指数化（同じ日付をベース＝100にする）：Divide each row of an XTS or ZOO time series object by a fixed row (a value on a Date)
+### 複数の指標を指数化（同じ日付をベース＝100にする）：Divide total xts data by specific day/month value by column (columnwise) 
 
 ```R
-<<<<<<< Updated upstream
-# wrong method
-data <- merged_prices/drop(coredata(merged_prices['2020-01-06']))*100 
-autoplot(data)
+rm(list = ls())
 
-# method available
-
-=======
-＃method wrong
-
-data <- merged_prices/drop(coredata(merged_prices['2020-01-06']))*100 
-autoplot(data)
-
-
-# method available: dataframe and mapply()
-date=seq.Date(as.Date('2000-01-01'),by='day',length.out = 5)
-a=1:5
-b=11:15
-c=21:25
->>>>>>> Stashed changes
-dat=data.frame(date,a,b,c)
-dat
-
-dat1=data.frame(mapply('/', dat[,-1],dat[2,-1]))
-dat1
-dat2 <- cbind(dat$date,dat1*100)
-dat2
-
-dat.xts <- xts(dat2[,-1],order.by = dat2$`dat$date`)
-library(tidyverse)
+# Load libraries
+if (!require(quantmod)) install.packages("quantmod", dependencies=TRUE)
+if (!require(ggplot2)) install.packages("ggplot2", dependencies=TRUE)
+if (!require(dplyr)) install.packages("dplyr", dependencies=TRUE)
+if (!require(tidyr)) install.packages("tidyr", dependencies=TRUE)
+if (!require(ggfortify)) install.packages("ggfortify", dependencies=TRUE)
+library(quantmod)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
 library(ggfortify)
-autoplot(dat.xts)
-<<<<<<< Updated upstream
-=======
+
+# Define currency symbols and empty list
+symbols <- c("CNY=X", "JPY=X", "EUR=X", "GBP=X") #need input!!!!!!!!!!!!!!!!!!!!!
+exchange_rates <- list()
+
+# Download data
+for (symbol in symbols) {
+  data <- getSymbols(symbol, src = "yahoo", from = "2010-01-01", to = "2022-12-31", auto.assign = FALSE)
+  exchange_rates[[symbol]] <- Cl(data)
+}
+
+# Combine and fill NA
+combined_data <- Reduce(merge, exchange_rates)
+data <- na.locf(combined_data)
+autoplot(data)
 
 
+# normalize all values: value on specific date=100
+base_day <- "2020-01-31" #need input!!!!!!!!!!!!!!!!!!!!!
+base_day_values <- data[base_day,] 
+normalized_baseday <- sweep(data, 2, base_day_values, FUN = "/") * 100
+autoplot(normalized_baseday,facets = F)
 
->>>>>>> Stashed changes
+# normalize all values: value on specific month=100
+base_month <- "2020-01" #need input!!!!!!!!!!!!!!!!!!!!!
+base_monthly_avg <- colMeans(data[base_month], na.rm = TRUE)
+normalized_basemonth <- sweep(data, 2, base_monthly_avg, FUN = "/") * 100
+autoplot(normalized_basemonth,facets = F)
+
+
 ```
 
 
