@@ -8,6 +8,18 @@ Update date: 4/30, 2021
 
 [TOC]
 
+# update R and RStudio
+
+when update, need to do the following things
+
+- uninstall the old version R, and download install new version R
+
+- download and install the new version RStudio into the same location. automatically cover the old version.
+- set language from `R/etc/Rconsole`, in a notebook editor, search and edit  `language = ` to `language = EN` 
+- set the package library location 
+
+
+
 # R
 
 ## Rstudio setting
