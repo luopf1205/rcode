@@ -2076,6 +2076,14 @@ dataf.2 <- dummy_cols(dataf,
 
 
 
+## other R package
+
+### performance: model diagnostics
+
+The primary goal of the **performance** package is to fill this gap and to provide utilities for computing **indices of model quality** and **goodness of fit**. These include measures like r-squared (R2), root mean squared error (RMSE) or intraclass correlation coefficient (ICC) , but also functions to check (mixed) models for overdispersion, zero-inflation, convergence or singularity.
+
+![img](https://easystats.github.io/performance/reference/figures/unnamed-chunk-14-1.png)
+
 
 
 ##  Other research tasks
