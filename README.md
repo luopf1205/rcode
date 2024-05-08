@@ -1,9 +1,10 @@
 ---
 title: useful R packages and functions
 Author: pengfei luo. 
-Update date: 4/30, 2021
+Update date: 4/30, 2024
 ---
-
+This the repository for Using R in economics for 3rd and 4th year university students.
+All the packages used in code can be download from CRAN.
 
 
 [TOC]
