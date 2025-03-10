@@ -51,6 +51,21 @@ Sys.setlocale("LC_ALL","English")
 
 ## packages
 
+### Rmarkdown
+
+keep all plots in root file when kintr: use `keep_md: true`
+
+```R
+---
+title: "Habits"
+output:
+  html_document:
+    keep_md: true
+---
+```
+
+
+
 ### gg-family (extension for ggplot)
 
 `ggfortify`
