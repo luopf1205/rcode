@@ -53,7 +53,7 @@ Sys.setlocale("LC_ALL","English")
 
 ### Rmarkdown
 
-keep all plots in root file when kintr: use `keep_md: true`
+keep all plots in root file when `knitr`: use `keep_md: true`
 
 ```R
 ---
